@@ -14,6 +14,7 @@ namespace ColorMatcher.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     private IColorRepository _repository;
+    private ISensorReader? _sensor;
 
     [ObservableProperty]
     private string referenceHex = "#FFFFFF";
@@ -69,6 +70,15 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private bool isProjectModified = false;
 
+    [ObservableProperty]
+    private bool isSensorConnected = false;
+
+    [ObservableProperty]
+    private string sensorStatus = "Not connected";
+
+    [ObservableProperty]
+    private bool isReadingColor = false;
+
     private bool isUpdatingReference;
     private bool isUpdatingSample;
 
@@ -76,6 +86,9 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Initialize with in-memory repository (can be switched to FileColorRepository)
         _repository = new InMemoryColorRepository();
+        
+        // Initialize with stub sensor reader (can be switched to real hardware)
+        _sensor = new StubSensorReader();
     }
 
     /// <summary>
@@ -468,5 +481,155 @@ public partial class MainWindowViewModel : ViewModelBase
         var project = await _repository.ImportProjectFromJsonAsync(jsonData);
         await LoadProjectAsync(project);
         await LoadRecentProjectsAsync();
+    }
+
+    /// <summary>
+    /// Connects to the sensor device.
+    /// </summary>
+    [RelayCommand]
+    public async Task ConnectSensorAsync()
+    {
+        if (_sensor == null)
+            return;
+
+        try
+        {
+            var connected = await _sensor.ConnectAsync();
+            if (connected)
+            {
+                IsSensorConnected = true;
+                var status = await _sensor.GetStatusAsync();
+                SensorStatus = status;
+            }
+        }
+        catch (Exception ex)
+        {
+            SensorStatus = $"Connection failed: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Disconnects from the sensor device.
+    /// </summary>
+    [RelayCommand]
+    public async Task DisconnectSensorAsync()
+    {
+        if (_sensor == null)
+            return;
+
+        try
+        {
+            await _sensor.DisconnectAsync();
+            IsSensorConnected = false;
+            SensorStatus = "Disconnected";
+        }
+        catch (Exception ex)
+        {
+            SensorStatus = $"Disconnection failed: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Reads a color sample from the sensor and sets it as the sample color.
+    /// </summary>
+    [RelayCommand]
+    public async Task ReadSensorSampleAsync()
+    {
+        if (_sensor == null || !IsSensorConnected)
+            return;
+
+        try
+        {
+            IsReadingColor = true;
+            SensorStatus = "Reading color...";
+
+            var reading = await _sensor.ReadColorWithValidationAsync(maxRetries: 3, minimumQualityScore: 70);
+
+            SampleR = reading.RgbColor.R.ToString();
+            SampleG = reading.RgbColor.G.ToString();
+            SampleB = reading.RgbColor.B.ToString();
+
+            SensorStatus = $"Color read successfully (Quality: {reading.QualityScore}%)";
+        }
+        catch (Exception ex)
+        {
+            SensorStatus = $"Reading failed: {ex.Message}";
+        }
+        finally
+        {
+            IsReadingColor = false;
+        }
+    }
+
+    /// <summary>
+    /// Reads a color reference from the sensor and sets it as the reference color.
+    /// </summary>
+    [RelayCommand]
+    public async Task ReadSensorReferenceAsync()
+    {
+        if (_sensor == null || !IsSensorConnected)
+            return;
+
+        try
+        {
+            IsReadingColor = true;
+            SensorStatus = "Reading reference color...";
+
+            var reading = await _sensor.ReadColorWithValidationAsync(maxRetries: 3, minimumQualityScore: 70);
+
+            ReferenceR = reading.RgbColor.R.ToString();
+            ReferenceG = reading.RgbColor.G.ToString();
+            ReferenceB = reading.RgbColor.B.ToString();
+
+            SensorStatus = $"Reference color read successfully (Quality: {reading.QualityScore}%)";
+        }
+        catch (Exception ex)
+        {
+            SensorStatus = $"Reading failed: {ex.Message}";
+        }
+        finally
+        {
+            IsReadingColor = false;
+        }
+    }
+
+    /// <summary>
+    /// Calibrates the sensor device.
+    /// </summary>
+    [RelayCommand]
+    public async Task CalibrateSensorAsync()
+    {
+        if (_sensor == null || !IsSensorConnected)
+            return;
+
+        try
+        {
+            SensorStatus = "Calibrating...";
+            var result = await _sensor.CalibrateAsync();
+            
+            if (result)
+            {
+                SensorStatus = "Calibration successful";
+            }
+            else
+            {
+                SensorStatus = "Calibration failed";
+            }
+        }
+        catch (Exception ex)
+        {
+            SensorStatus = $"Calibration error: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Sets a custom ISensorReader implementation (for testing or hardware integration).
+    /// </summary>
+    public void SetSensorReader(ISensorReader sensor)
+    {
+        _sensor?.Dispose();
+        _sensor = sensor ?? throw new ArgumentNullException(nameof(sensor));
+        IsSensorConnected = false;
+        SensorStatus = "Sensor changed";
     }
 }
