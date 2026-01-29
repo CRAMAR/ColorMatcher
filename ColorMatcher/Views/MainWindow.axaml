@@ -38,6 +38,18 @@
                             <Button Content="New Project" Command="{Binding CreateNewProjectCommand}" Margin="0,0,4,0" />
                             <Button Content="Save Project" Command="{Binding SaveProjectCommand}" Margin="4,0,0,0" />
                         </UniformGrid>
+
+                        <!-- Project Status Indicator -->
+                        <StackPanel Spacing="2" Margin="0,8,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock FontSize="10" Opacity="0.6" Text="Project:" />
+                                <TextBlock FontSize="10" Opacity="0.8" Text="{Binding ProjectName}" FontWeight="Medium" />
+                                <TextBlock FontSize="10" Foreground="#FFA726" Text="●" IsVisible="{Binding IsProjectModified}" />
+                            </StackPanel>
+                            <TextBlock FontSize="9" Foreground="#FFA726" Opacity="0.8"
+                                       IsVisible="{Binding IsProjectModified}"
+                                       Text="Unsaved changes" />
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
