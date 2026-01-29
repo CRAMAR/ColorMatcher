@@ -35,8 +35,10 @@
                         </Grid>
 
                         <UniformGrid Columns="2" HorizontalAlignment="Stretch">
-                            <Button Content="New Project" Command="{Binding CreateNewProjectCommand}" Margin="0,0,4,0" />
-                            <Button Content="Save Project" Command="{Binding SaveProjectCommand}" Margin="4,0,0,0" />
+                            <Button Content="New Project" Command="{Binding CreateNewProjectCommand}" Margin="0,0,4,0"
+                                    ToolTip.Tip="Create a new project with current colors" />
+                            <Button Content="Save Project" Command="{Binding SaveProjectCommand}" Margin="4,0,0,0"
+                                    ToolTip.Tip="Save project changes to disk" />
                         </UniformGrid>
 
                         <!-- Project Status Indicator -->
@@ -55,7 +57,11 @@
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Reference Color (Target)" FontWeight="SemiBold" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Reference Color (Target)" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    <TextBlock Text="①" FontSize="10" Opacity="0.5" VerticalAlignment="Center"
+                               ToolTip.Tip="Step 1: Enter your target color" />
+                </StackPanel>
                 <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
                     <StackPanel Spacing="12" Margin="12">
                     <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
@@ -80,7 +86,11 @@
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Sample Color" FontWeight="SemiBold" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Sample Color" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    <TextBlock Text="②" FontSize="10" Opacity="0.5" VerticalAlignment="Center"
+                               ToolTip.Tip="Step 2: Enter or adjust your sample color" />
+                </StackPanel>
                 <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
                     <StackPanel Spacing="12" Margin="12">
                     <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
@@ -105,22 +115,28 @@
             </StackPanel>
 
             <!-- Accept Color Match -->
-            <Button Content="✓ Accept Match" 
-                    Command="{Binding SaveColorMatchCommand}" 
-                    HorizontalAlignment="Stretch"
-                    Height="40"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Background="#1B5E20"
-                    Foreground="White"
-                    CornerRadius="8"
-                    Margin="0,8,0,0">
-                <Button.Styles>
-                    <Style Selector="Button:pointerover">
-                        <Setter Property="Background" Value="#2E7D32" />
-                    </Style>
-                </Button.Styles>
-            </Button>
+            <StackPanel Spacing="4">
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" Margin="0,4,0,0">
+                    <TextBlock Text="③" FontSize="10" Opacity="0.5" VerticalAlignment="Center" />
+                    <TextBlock Text="Review match quality below, then accept" FontSize="9" Opacity="0.5" VerticalAlignment="Center" />
+                </StackPanel>
+                <Button Content="✓ Accept Match" 
+                        Command="{Binding SaveColorMatchCommand}" 
+                        HorizontalAlignment="Stretch"
+                        Height="40"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Background="#1B5E20"
+                        Foreground="White"
+                        CornerRadius="8"
+                        ToolTip.Tip="Step 3: Save this color match to history">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover">
+                            <Setter Property="Background" Value="#2E7D32" />
+                        </Style>
+                    </Button.Styles>
+                </Button>
+            </StackPanel>
         </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
@@ -128,8 +144,10 @@
                 <TextBlock Text="LAB Color Space" FontSize="20" FontWeight="SemiBold" />
                 <v:LabColorGraph x:Name="LabGraph" Height="420" />
                 <StackPanel Spacing="4">
-                    <TextBlock Text="{Binding ColorDifference, StringFormat='ΔE: {0:F2}'}" FontSize="12" />
-                    <TextBlock Text="{Binding TintRecommendation}" Foreground="#90CAF9" FontSize="11" />
+                    <TextBlock Text="{Binding ColorDifference, StringFormat='ΔE: {0:F2}'}" FontSize="12"
+                               ToolTip.Tip="Color difference: &lt;1 imperceptible, 1-2 barely noticeable, 2-5 perceptible, &gt;5 significant" />
+                    <TextBlock Text="{Binding TintRecommendation}" Foreground="#90CAF9" FontSize="11"
+                               ToolTip.Tip="Recommended color adjustments to improve match" />
                 </StackPanel>
             </StackPanel>
         </Border>
