@@ -38,11 +38,11 @@ namespace ColorMatcher.Tests
         }
 
         [Theory]
-        [InlineData("256", "0", "0")]       // Out of range
-        [InlineData("-1", "0", "0")]        // Negative
-        [InlineData("abc", "0", "0")]       // Non-numeric
-        [InlineData("", "0", "0")]          // Empty
-        public void ReferenceColorUpdate_WithInvalidByte_IsIgnored(string r, string _, string __)
+        [InlineData("256")]       // Out of range
+        [InlineData("-1")]        // Negative
+        [InlineData("abc")]       // Non-numeric
+        [InlineData("")]          // Empty
+        public void ReferenceColorUpdate_WithInvalidByte_IsIgnored(string r)
         {
             var vm = CreateViewModel();
             var originalR = vm.ReferenceR;
