@@ -164,6 +164,84 @@ namespace ColorMatcher.Tests
 
         #endregion
 
+        #region Match Notes and Accepted Status
+
+        [Fact]
+        public async Task SaveColorMatch_WithNotes_StoresNotesInHistory()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-match-notes");
+
+            vm.ProjectName = "Notes Test";
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "100";
+            vm.ReferenceB = "100";
+            vm.SampleR = "110";
+            vm.SampleG = "110";
+            vm.SampleB = "110";
+            vm.MatchNotes = "Added extra blue tint";
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.Equal("Added extra blue tint", vm.HistoryItems[0].Notes);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_WithoutNotes_UsesDefaultText()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-default-notes");
+
+            vm.ProjectName = "Default Notes Test";
+            vm.ReferenceR = "50";
+            vm.ReferenceG = "50";
+            vm.ReferenceB = "50";
+            vm.MatchNotes = "";  // Empty notes
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.Equal("Manual color match", vm.HistoryItems[0].Notes);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_WithIsAccepted_StoresAcceptedFlag()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-accepted");
+
+            vm.ProjectName = "Accepted Test";
+            vm.ReferenceR = "200";
+            vm.ReferenceG = "100";
+            vm.ReferenceB = "50";
+            vm.IsMatchAccepted = true;
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.True(vm.HistoryItems[0].IsAccepted);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_ClearsNotesAfterSaving()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-clear-notes");
+
+            vm.ProjectName = "Clear Notes Test";
+            vm.MatchNotes = "Test notes";
+            vm.IsMatchAccepted = false;
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            // Notes should be cleared and accepted reset to true
+            Assert.Empty(vm.MatchNotes);
+            Assert.True(vm.IsMatchAccepted);
+        }
+
+        #endregion
+
         #region Color Difference Calculations
 
         [Fact]

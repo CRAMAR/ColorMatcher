@@ -148,6 +148,26 @@
                 </Border>
             </StackPanel>
 
+            <!-- Match Details -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Match Details (Optional)" FontWeight="SemiBold" FontSize="11" Opacity="0.8" />
+                <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
+                    <StackPanel Spacing="8" Margin="12">
+                        <CheckBox Content="Mark as accepted match" 
+                                  IsChecked="{Binding IsMatchAccepted}"
+                                  FontSize="11"
+                                  ToolTip.Tip="Check if this match meets quality standards" />
+                        <TextBox Text="{Binding MatchNotes}" 
+                                 Watermark="Notes about this match (optional)"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 Height="50"
+                                 FontSize="11"
+                                 ToolTip.Tip="Add notes about formulation, adjustments, or observations" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
             <!-- Accept Color Match -->
             <StackPanel Spacing="4">
                 <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" Margin="0,4,0,0">
