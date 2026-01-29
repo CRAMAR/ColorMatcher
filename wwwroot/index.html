@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ColorMatcher</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:2rem}
+    #swatch{width:120px;height:120px;border:1px solid #ccc}
+  </style>
+</head>
+<body>
+  <h1>ColorMatcher</h1>
+  <p>Upload an image to detect the dominant color.</p>
+  <input type="file" id="file" accept="image/*" />
+  <button id="go">Match</button>
+  <div style="margin-top:1rem">
+    <div id="swatch"></div>
+    <p id="info"></p>
+  </div>
+<script>
+document.getElementById('go').onclick = async ()=>{
+  const f = document.getElementById('file').files[0];
+  if(!f) return alert('Choose a file');
+  const fd = new FormData(); fd.append('file', f);
+  const res = await fetch('/api/match', { method:'POST', body:fd });
+  if(!res.ok) return alert('Error: '+res.statusText);
+  const j = await res.json();
+  document.getElementById('swatch').style.background = j.Hex;
+  document.getElementById('info').textContent = `${j.Name} — ${j.Hex} (R:${j.R} G:${j.G} B:${j.B})`;
+}
+</script>
+</body>
+</html>
