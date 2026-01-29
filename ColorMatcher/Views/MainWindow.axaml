@@ -91,6 +91,24 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
+
+            <!-- Accept Color Match -->
+            <Button Content="✓ Accept Match" 
+                    Command="{Binding SaveColorMatchCommand}" 
+                    HorizontalAlignment="Stretch"
+                    Height="40"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Background="#1B5E20"
+                    Foreground="White"
+                    CornerRadius="8"
+                    Margin="0,8,0,0">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#2E7D32" />
+                    </Style>
+                </Button.Styles>
+            </Button>
         </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
