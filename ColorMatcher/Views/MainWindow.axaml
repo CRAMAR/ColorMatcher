@@ -13,7 +13,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <Grid Margin="24" ColumnDefinitions="340,*" RowDefinitions="Auto,*">
+    <Grid Margin="24" ColumnDefinitions="340,*" RowDefinitions="Auto,*,Auto">
         <StackPanel Grid.Column="0" Spacing="16">
             <StackPanel>
                 <TextBlock Text="ColorMatcher" FontSize="24" FontWeight="SemiBold" />
@@ -71,7 +71,7 @@
             </StackPanel>
         </StackPanel>
 
-        <Border Grid.Column="1" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
+        <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
             <StackPanel Margin="24" Spacing="12">
                 <TextBlock Text="LAB Color Space" FontSize="20" FontWeight="SemiBold" />
                 <v:LabColorGraph x:Name="LabGraph" Height="420" />
@@ -80,6 +80,10 @@
                     <TextBlock Text="{Binding TintRecommendation}" Foreground="#90CAF9" FontSize="11" />
                 </StackPanel>
             </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,12,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414" Padding="24">
+            <v:ColorHistoryView DataContext="{Binding}" />
         </Border>
     </Grid>
 

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -66,6 +67,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private ObservableCollection<ColorProject> recentProjects = new();
+
+    [ObservableProperty]
+    private ObservableCollection<ColorHistoryEntry> historyItems = new();
 
     [ObservableProperty]
     private bool isProjectModified = false;
@@ -390,6 +394,7 @@ public partial class MainWindowViewModel : ViewModelBase
         };
 
         await _repository.AddColorHistoryAsync(CurrentProject.Id, historyEntry);
+        await RefreshHistoryAsync();
     }
 
     /// <summary>
@@ -419,6 +424,7 @@ public partial class MainWindowViewModel : ViewModelBase
             SampleB = project.SampleColor.B.ToString();
         }
 
+        await RefreshHistoryAsync();
         IsProjectModified = false;
     }
 
@@ -631,5 +637,98 @@ public partial class MainWindowViewModel : ViewModelBase
         _sensor = sensor ?? throw new ArgumentNullException(nameof(sensor));
         IsSensorConnected = false;
         SensorStatus = "Sensor changed";
+    }
+
+    /// <summary>
+    /// Refreshes the history items from the current project.
+    /// </summary>
+    private async Task RefreshHistoryAsync()
+    {
+        if (CurrentProject == null)
+        {
+            HistoryItems.Clear();
+            return;
+        }
+
+        var project = await _repository.GetProjectAsync(CurrentProject.Id);
+        if (project?.ColorHistory != null)
+        {
+            HistoryItems.Clear();
+            foreach (var entry in project.ColorHistory.OrderByDescending(h => h.CreatedAt))
+            {
+                HistoryItems.Add(entry);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Reuses a history entry as the reference color.
+    /// </summary>
+    [RelayCommand]
+    public void ReuseAsReference(ColorHistoryEntry? entry)
+    {
+        if (entry?.ReferenceColor == null)
+            return;
+
+        ReferenceR = entry.ReferenceColor.R.ToString();
+        ReferenceG = entry.ReferenceColor.G.ToString();
+        ReferenceB = entry.ReferenceColor.B.ToString();
+        UpdateReferenceFromRgb();
+    }
+
+    /// <summary>
+    /// Reuses a history entry as the sample color.
+    /// </summary>
+    [RelayCommand]
+    public void ReuseAsSample(ColorHistoryEntry? entry)
+    {
+        if (entry?.SampleColor == null)
+            return;
+
+        SampleR = entry.SampleColor.R.ToString();
+        SampleG = entry.SampleColor.G.ToString();
+        SampleB = entry.SampleColor.B.ToString();
+        UpdateSampleFromRgb();
+    }
+
+    /// <summary>
+    /// Exports history as CSV format string.
+    /// </summary>
+    [RelayCommand]
+    public async Task ExportHistoryAsCsvAsync()
+    {
+        if (HistoryItems.Count == 0)
+            return;
+
+        var csv = new StringBuilder();
+        csv.AppendLine("Timestamp,Reference RGB,Sample RGB,ΔE,Recommendation,Accepted,Notes");
+
+        foreach (var entry in HistoryItems)
+        {
+            var refRgb = entry.ReferenceColor?.ToString() ?? "N/A";
+            var smpRgb = entry.SampleColor?.ToString() ?? "N/A";
+            var notes = (entry.Notes ?? "").Replace(",", ";"); // Escape commas in notes
+
+            csv.AppendLine($"{entry.CreatedAt:yyyy-MM-dd HH:mm:ss},{refRgb},{smpRgb},{entry.DeltaE:F2},{entry.TintRecommendation},{entry.IsAccepted},{notes}");
+        }
+
+        // TODO: Implement file dialog to save CSV
+        System.Diagnostics.Debug.WriteLine("CSV Export:\n" + csv.ToString());
+        await Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Clears all history entries from current project.
+    /// </summary>
+    [RelayCommand]
+    public async Task ClearHistoryAsync()
+    {
+        if (CurrentProject == null)
+            return;
+
+        CurrentProject.ColorHistory.Clear();
+        HistoryItems.Clear();
+        IsProjectModified = true;
+        await SaveProjectAsync();
     }
 }
