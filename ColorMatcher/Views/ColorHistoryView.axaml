@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:ColorMatcher.ViewModels"
+    x:Class="ColorMatcher.Views.ColorHistoryView"
+    x:DataType="vm:MainWindowViewModel">
+
+    <StackPanel Spacing="12">
+        <TextBlock Text="Color History" FontSize="16" FontWeight="SemiBold" />
+        
+        <StackPanel Spacing="8" Orientation="Horizontal">
+            <Button Content="Reuse as Reference" Padding="12,6" CornerRadius="6" 
+                    Background="#1976D2" Foreground="White" FontSize="11"
+                    Command="{Binding ReuseAsReferenceCommand}" />
+            <Button Content="Reuse as Sample" Padding="12,6" CornerRadius="6" 
+                    Background="#388E3C" Foreground="White" FontSize="11"
+                    Command="{Binding ReuseAsSampleCommand}" />
+            <Button Content="Export CSV" Padding="12,6" CornerRadius="6" 
+                    Background="#F57C00" Foreground="White" FontSize="11"
+                    Command="{Binding ExportHistoryAsCsvCommand}" />
+            <Button Content="Clear History" Padding="12,6" CornerRadius="6" 
+                    Background="#D32F2F" Foreground="White" FontSize="11"
+                    Command="{Binding ClearHistoryCommand}" />
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding HistoryItems}" 
+                  IsReadOnly="True"
+                  CanUserResizeColumns="True"
+                  CanUserReorderColumns="False"
+                  BorderBrush="#2E2E2E"
+                  BorderThickness="1"
+                  Foreground="#E0E0E0"
+                  MaxHeight="300"
+                  AutoGenerateColumns="False">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Width="90">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="CreatedAt" StringFormat="HH:mm:ss" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Reference" Width="110">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="ReferenceColor" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Sample" Width="110">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="SampleColor" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="ΔE" Width="60">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="DeltaE" StringFormat="F2" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Recommendation" Width="130">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="TintRecommendation" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="OK" Width="50" Binding="{Binding IsAccepted}" />
+                <DataGridTextColumn Header="Notes" Width="140">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Notes" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Text="No history entries yet. Save color matches to see them here." 
+                   Opacity="0.6" FontSize="11" Margin="0,8" />
+    </StackPanel>
+
+</UserControl>
