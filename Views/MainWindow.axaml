@@ -1,13 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:ColorMatcher.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="ColorMatcher.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="ColorMatcher">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:ColorMatcher.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+    x:Class="ColorMatcher.Views.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    Title="ColorMatcher (Alpha)">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +15,68 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Margin="24" ColumnDefinitions="340,*" RowDefinitions="Auto,*">
+        <StackPanel Grid.Column="0" Spacing="16">
+            <StackPanel>
+                <TextBlock Text="ColorMatcher" FontSize="24" FontWeight="SemiBold" />
+                <TextBlock Text="Enter target and sample colors to visualize in LAB space." Opacity="0.7" />
+            </StackPanel>
+
+            <GroupBox Header="Reference Color (Target)">
+                <StackPanel Spacing="12" Margin="12">
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                        <TextBlock Text="Hex" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding ReferenceHex}" Grid.Row="0" Grid.Column="1" Watermark="#FFFFFF" />
+
+                        <TextBlock Text="R" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding ReferenceR}" Grid.Row="1" Grid.Column="1" Watermark="255" />
+
+                        <TextBlock Text="G" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding ReferenceG}" Grid.Row="2" Grid.Column="1" Watermark="255" />
+
+                        <TextBlock Text="B" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding ReferenceB}" Grid.Row="3" Grid.Column="1" Watermark="255" />
+                    </Grid>
+
+                    <Border Height="72" CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="{Binding ReferenceBrush}">
+                        <TextBlock Text="Reference" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" />
+                    </Border>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Sample Color">
+                <StackPanel Spacing="12" Margin="12">
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                        <TextBlock Text="Hex" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding SampleHex}" Grid.Row="0" Grid.Column="1" Watermark="#808080" />
+
+                        <TextBlock Text="R" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding SampleR}" Grid.Row="1" Grid.Column="1" Watermark="128" />
+
+                        <TextBlock Text="G" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding SampleG}" Grid.Row="2" Grid.Column="1" Watermark="128" />
+
+                        <TextBlock Text="B" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding SampleB}" Grid.Row="3" Grid.Column="1" Watermark="128" />
+                    </Grid>
+
+                    <Border Height="72" CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="{Binding SampleBrush}">
+                        <TextBlock Text="Sample" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" />
+                    </Border>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <Border Grid.Column="1" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
+            <StackPanel Margin="24" Spacing="12">
+                <TextBlock Text="LAB Color Space" FontSize="20" FontWeight="SemiBold" />
+                <TextBlock Text="Graph placeholder: reference and sample points will render here." Opacity="0.7" />
+                <Border Height="420" CornerRadius="8" BorderBrush="#3A3A3A" BorderThickness="1" Background="#1C1C1C">
+                    <TextBlock Text="LAB Graph (coming soon)" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.6" />
+                </Border>
+                <TextBlock Text="Tint guidance will appear once LAB conversion is implemented." Opacity="0.7" />
+            </StackPanel>
+        </Border>
+    </Grid>
 
 </Window>
