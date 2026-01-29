@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using ColorMatcher.Models;
 
 namespace ColorMatcher.ViewModels;
 
@@ -36,6 +38,15 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private SolidColorBrush sampleBrush = new(Colors.Gray);
 
+    [ObservableProperty]
+    private LabColorGraphModel graphModel = new();
+
+    [ObservableProperty]
+    private double colorDifference = 0;
+
+    [ObservableProperty]
+    private string tintRecommendation = "Enter both colors";
+
     private bool isUpdatingReference;
     private bool isUpdatingSample;
 
@@ -57,11 +68,26 @@ public partial class MainWindowViewModel : ViewModelBase
         ReferenceB = color.B.ToString(CultureInfo.InvariantCulture);
         ReferenceBrush = new SolidColorBrush(color);
         isUpdatingReference = false;
+        UpdateGraphData();
     }
 
-    partial void OnReferenceRChanged(string value) => UpdateReferenceFromRgb();
-    partial void OnReferenceGChanged(string value) => UpdateReferenceFromRgb();
-    partial void OnReferenceBChanged(string value) => UpdateReferenceFromRgb();
+    partial void OnReferenceRChanged(string value)
+    {
+        UpdateReferenceFromRgb();
+        UpdateGraphData();
+    }
+
+    partial void OnReferenceGChanged(string value)
+    {
+        UpdateReferenceFromRgb();
+        UpdateGraphData();
+    }
+
+    partial void OnReferenceBChanged(string value)
+    {
+        UpdateReferenceFromRgb();
+        UpdateGraphData();
+    }
 
     partial void OnSampleHexChanged(string value)
     {
@@ -83,9 +109,23 @@ public partial class MainWindowViewModel : ViewModelBase
         isUpdatingSample = false;
     }
 
-    partial void OnSampleRChanged(string value) => UpdateSampleFromRgb();
-    partial void OnSampleGChanged(string value) => UpdateSampleFromRgb();
-    partial void OnSampleBChanged(string value) => UpdateSampleFromRgb();
+    partial void OnSampleRChanged(string value)
+    {
+        UpdateSampleFromRgb();
+        UpdateGraphData();
+    }
+
+    partial void OnSampleGChanged(string value)
+    {
+        UpdateSampleFromRgb();
+        UpdateGraphData();
+    }
+
+    partial void OnSampleBChanged(string value)
+    {
+        UpdateSampleFromRgb();
+        UpdateGraphData();
+    }
 
     private void UpdateReferenceFromRgb()
     {
@@ -184,5 +224,31 @@ public partial class MainWindowViewModel : ViewModelBase
 
         color = Color.FromRgb(r, g, b);
         return true;
+    }
+
+    private void UpdateGraphData()
+    {
+        if (!TryParseByte(ReferenceR, out var refR) || !TryParseByte(ReferenceG, out var refG) || !TryParseByte(ReferenceB, out var refB))
+        {
+            GraphModel.ReferenceColor = null;
+        }
+        else
+        {
+            var refRgb = new RgbColor(refR, refG, refB);
+            GraphModel.ReferenceColor = ColorSpaceConverter.RgbToLab(refRgb);
+        }
+
+        if (!TryParseByte(SampleR, out var smpR) || !TryParseByte(SampleG, out var smpG) || !TryParseByte(SampleB, out var smpB))
+        {
+            GraphModel.SampleColor = null;
+        }
+        else
+        {
+            var smpRgb = new RgbColor(smpR, smpG, smpB);
+            GraphModel.SampleColor = ColorSpaceConverter.RgbToLab(smpRgb);
+        }
+
+        ColorDifference = GraphModel.GetColorDifference();
+        TintRecommendation = GraphModel.GetTintRecommendation();
     }
 }

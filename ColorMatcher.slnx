@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ColorMatcher.Tests/ColorMatcher.Tests.csproj" />
+  <Project Path="ColorMatcher/ColorMatcher.csproj" />
+</Solution>
