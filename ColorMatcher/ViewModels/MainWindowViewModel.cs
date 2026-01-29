@@ -311,6 +311,9 @@ public partial class MainWindowViewModel : ViewModelBase
         ColorDifference = GraphModel.GetColorDifference();
         TintRecommendation = GraphModel.GetTintRecommendation();
         IsProjectModified = true;
+
+        // Notify UI that GraphModel has changed to trigger graph redraw
+        OnPropertyChanged(nameof(GraphModel));
     }
 
     /// <summary>
