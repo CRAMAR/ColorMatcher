@@ -7,13 +7,88 @@ using System.Threading.Tasks;
 namespace ColorMatcher.Models
 {
     /// <summary>
-    /// In-memory implementation of IColorRepository for development and testing.
-    /// All data is stored in memory and lost on application exit.
-    /// For production use, implement a file-based or database-backed variant.
+    /// In-memory implementation of IColorRepository for development, testing, and prototyping.
+    /// 
+    /// Stores all projects and history in memory using a Dictionary&lt;string, ColorProject&gt;.
+    /// All data is lost when the application exits (no persistence to disk).
+    /// 
+    /// <remarks>
+    /// **Use Cases**
+    /// 
+    /// 1. **Development**: Quick prototyping without file I/O overhead
+    /// 2. **Unit Testing**: Mock repository for isolated ViewModel/business logic tests
+    /// 3. **Integration Testing**: Test entire workflows without database/file system
+    /// 4. **Demo/Prototype**: Temporary projects without persistence requirements
+    /// 5. **Performance Testing**: Baseline measurements without storage latency
+    /// 
+    /// **Characteristics**
+    /// 
+    /// - **Speed**: Ultra-fast, all operations &lt;1ms
+    /// - **Simplicity**: No file system or database concerns
+    /// - **Thread-Safety**: Synchronized via internal lock for concurrent access
+    /// - **Non-Durable**: All data lost on exit (feature, not bug, for testing)
+    /// - **Memory**: Stores complete projects in memory (fine for test datasets)
+    /// 
+    /// **Data Structure**
+    /// 
+    /// Uses Dictionary&lt;ProjectId, ColorProject&gt; for O(1) lookups:
+    /// - Key: Project GUID (unique identifier)
+    /// - Value: Complete ColorProject including all ColorHistoryEntry records
+    /// - Thread-safe access via internal lock
+    /// 
+    /// **Thread Safety**
+    /// 
+    /// All operations protected by a lock to ensure consistency:
+    /// - Prevents corruption when multiple threads access simultaneously
+    /// - Serializes modifications (updates wait for lock release)
+    /// - Safe for concurrent reads and writes (lock held for entire operation)
+    /// 
+    /// **Typical Usage in Tests**
+    /// 
+    /// ```csharp
+    /// // Test setup
+    /// var repository = new InMemoryColorRepository();
+    /// var viewModel = new MainWindowViewModel { Repository = repository };
+    /// 
+    /// // Create and test
+    /// var project = new ColorProject { Id = Guid.NewGuid().ToString(), Name = "Test" };
+    /// await repository.CreateProjectAsync(project);
+    /// var retrieved = await repository.GetProjectAsync(project.Id);
+    /// Assert.NotNull(retrieved);
+    /// 
+    /// // On test exit: all data discarded (clean state for next test)
+    /// ```
+    /// 
+    /// **FileColorRepository Relationship**
+    /// 
+    /// FileColorRepository uses InMemoryColorRepository internally:
+    /// 1. Loads all projects from disk JSON files
+    /// 2. Caches in InMemoryColorRepository for fast access
+    /// 3. For new projects, writes to both memory and disk
+    /// 
+    /// This hybrid design provides both performance (memory cache) and durability (disk backup).
+    /// 
+    /// **Performance Characteristics**
+    /// 
+    /// - CreateProjectAsync: O(1) dictionary insert
+    /// - GetProjectAsync: O(1) dictionary lookup
+    /// - GetAllProjectsAsync: O(n) enumeration of n projects
+    /// - DeleteProjectAsync: O(1) dictionary removal
+    /// - All operations complete &lt;1ms on modern hardware
+    /// </remarks>
     /// </summary>
     public class InMemoryColorRepository : IColorRepository
     {
+        /// <summary>
+        /// Dictionary storing all projects with ProjectId as key.
+        /// Provides O(1) lookup performance for GetProjectAsync().
+        /// </summary>
         private readonly Dictionary<string, ColorProject> _projects = new Dictionary<string, ColorProject>();
+
+        /// <summary>
+        /// Lock for thread-safe access to the projects dictionary.
+        /// Ensures consistency when multiple threads access simultaneously.
+        /// </summary>
         private readonly object _lock = new object();
 
         public Task<ColorProject> CreateProjectAsync(ColorProject project)
