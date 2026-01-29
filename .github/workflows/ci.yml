@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'alpha-*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Restore
+        run: dotnet restore ColorMatcher.csproj
+      - name: Build
+        run: dotnet build ColorMatcher.csproj --configuration Release --no-restore
+      - name: Test
+        run: dotnet test ColorMatcher.csproj --configuration Release --no-build --verbosity normal
+
+  build:
+    needs: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            runtime: linux-x64
+          - os: windows-latest
+            runtime: win-x64
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Restore
+        run: dotnet restore ColorMatcher.csproj
+      - name: Build
+        run: dotnet build ColorMatcher.csproj --configuration Release --no-restore
+      - name: Publish
+        run: dotnet publish ColorMatcher.csproj -c Release -r ${{ matrix.runtime }} --self-contained false -o publish/${{ matrix.runtime }}
+      - name: Create Archive (Linux)
+        if: runner.os != 'Windows'
+        run: |
+          cd publish/${{ matrix.runtime }}
+          tar -czf ../../color-matcher-${{ matrix.runtime }}.tar.gz .
+          cd ../../
+      - name: Create Archive (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          cd publish/${{ matrix.runtime }}
+          powershell Compress-Archive -Path . -DestinationPath ../../color-matcher-${{ matrix.runtime }}.zip
+          cd ../../
+      - name: Upload archive as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: color-matcher-${{ matrix.runtime }}-archive
+          path: |
+            *.tar.gz
+            *.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/alpha-')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.{tar.gz,zip}
+          fail_on_unmatched_files: true
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
