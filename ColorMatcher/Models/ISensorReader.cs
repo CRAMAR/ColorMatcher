@@ -168,7 +168,9 @@ namespace ColorMatcher.Models
         /// Recommended for general use. Lower values (50) for fast measurement, higher (85+) for precision.</param>
         /// <returns>Best SensorReading found that meets quality requirements, or last reading if none qualify</returns>
         /// 
-        /// <exception cref="InvalidOperationException">If sensor is not connected</exception>
+        /// <exception cref="InvalidOperationException">
+        /// Propagated from <see cref="ReadColorAsync"/> if the sensor is not connected (call ConnectAsync first).
+        /// </exception>
         /// 
         /// <remarks>
         /// If no reading reaches minimumQualityScore after all retries, returns the last
