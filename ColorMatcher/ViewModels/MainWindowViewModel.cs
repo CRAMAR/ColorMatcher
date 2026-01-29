@@ -83,9 +83,28 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private bool isReadingColor = false;
 
+    /// <summary>
+    /// User-provided notes or comments about the current color match attempt.
+    /// 
+    /// Used in the Match Details section of the UI to annotate color matches with
+    /// contextual information (e.g., "First attempt post-calibration", "High ambient light").
+    /// Auto-cleared to empty string after match is saved to history.
+    /// 
+    /// Default: Empty string
+    /// Max length: No enforced limit (user responsibility)
+    /// </summary>
     [ObservableProperty]
     private string matchNotes = "";
 
+    /// <summary>
+    /// Whether the current color match attempt meets user's acceptance criteria.
+    /// 
+    /// Checkbox in the Match Details UI. When true, indicates the match is acceptable
+    /// and should be saved to history. Used for filtering and reporting in color history.
+    /// Auto-reset to true after each match is saved.
+    /// 
+    /// Default: true (matches are considered acceptable until user unchecks)
+    /// </summary>
     [ObservableProperty]
     private bool isMatchAccepted = true;
 
@@ -375,6 +394,22 @@ public partial class MainWindowViewModel : ViewModelBase
 
     /// <summary>
     /// Saves the current color match to the project history.
+    /// 
+    /// Creates a new project automatically if none exists. Validates reference and sample colors,
+    /// calculates ΔE, generates tint recommendations, and adds entry to project history with
+    /// user-provided notes and acceptance status.
+    /// 
+    /// After successful save:
+    /// - MatchNotes are cleared to empty string
+    /// - IsMatchAccepted is reset to true
+    /// - History entry is persisted to disk via repository
+    /// 
+    /// <remarks>
+    /// The Match Details section (UI) captures:
+    /// - Notes: User annotations (e.g., "Post-recalibration")
+    /// - IsAccepted: Whether match met quality threshold
+    /// Both are stored in ColorHistoryEntry for audit/reporting.
+    /// </remarks>
     /// </summary>
     [RelayCommand]
     public async Task SaveColorMatchAsync()

@@ -9,8 +9,11 @@ A professional color matching application for paint, dye, and material industrie
 - **Perceptual Color Difference**: Uses CIE LAB color space for human eye-aligned calculations (ΔE)
 - **Tint Recommendations**: Intelligent guidance on which color adjustments to make (Add Red, Add Yellow, etc.)
 - **Project Management**: Create, save, and load color matching sessions with complete audit trails
+- **Recent Projects**: Quick-access list of last 10 projects with timestamps
+- **Match Workflow**: Step-by-step UI guidance (①②③) with project state tracking (unsaved indicator)
+- **Match Notes**: Annotate each color match with notes and acceptance status
 - **Color History**: Full history of all matching attempts with metadata preservation
-- **Cross-Platform**: Built with .NET 8 and Avalonia for Windows, macOS, and Linux
+- **Cross-Platform**: Built with .NET 10 and Avalonia for Windows, macOS, and Linux
 
 ## Architecture Overview
 
@@ -24,7 +27,7 @@ The application uses a layered architecture with clear separation of concerns:
 ## Building
 
 ### Requirements
-- .NET 8.0 SDK or later
+- .NET 10.0 SDK or later
 - (Optional) NIX Mini 3 or compatible spectrophotometer
 
 ### Build Instructions
@@ -54,25 +57,28 @@ dotnet test
 2. **Create a New Project**
    - Click "New Project" button
    - Enter project name and optional description
+   - Project automatically marked as modified (orange ● indicator) until saved
 
 3. **Set Reference Color (Target)**
    - Enter hex code (e.g., `#FF5733`) or
    - Adjust RGB sliders (0-255 each)
-   - Reference color displays in real-time
+   - Reference color displays in real-time (Step ①)
 
 4. **Enter Sample Color (Candidate)**
    - Input the color you're trying to match
-   - ΔE (color difference) updates live
+   - ΔE (color difference) updates live (Step ②)
    - Tint recommendations appear (e.g., "Add Red, Add Yellow")
 
-5. **Iterate Until Match**
-   - Adjust sample color based on recommendations
-   - Click "Accept Match" to save to history
-   - Continue until acceptable ΔE achieved (< 2.0 recommended)
+5. **Add Match Notes & Accept**
+   - Add optional notes about the match (e.g., "First attempt with calibration fix")
+   - Check "Mark as accepted match" if satisfied
+   - Click "✓ Accept Match" to save to history (Step ③)
+   - Notes auto-clear after saving
 
-6. **Save Project**
-   - Project auto-saves to disk
-   - Load previous projects from "Recent Projects" list
+6. **Iterate & Save Project**
+   - Repeat steps 3-5 until acceptable ΔE achieved (< 2.0 recommended)
+   - Click "Save Project" when done (clears the orange ● indicator)
+   - Access previous projects from "Recent Projects" list
 
 ## Color Science Primer
 
@@ -105,6 +111,20 @@ Used for color matching calculations:
 | 5.0 - 10.0 | Significant difference | Major adjustments needed |
 | > 10.0 | Very obvious | Unsuitable, start over |
 
+## Recent Updates (v0.2.0)
+
+### P0 Fixes (Critical)
+- ✅ Fixed graph redraw when colors change (#13)
+- ✅ Added project management UI (New/Save buttons) (#14)
+- ✅ Added "Accept Match" button for workflow clarity (#15)
+- ✅ Graph model property change notifications (#18)
+
+### P1 Enhancements (Workflow)
+- ✅ Workflow step indicators (①②③) with tooltips (#16)
+- ✅ Project state tracking with unsaved indicator (●) (#17)
+- ✅ Recent projects quick-access list (max 10) (#20)
+- ✅ Match notes and acceptance tracking (#21)
+
 ## Testing
 
 ```bash
@@ -121,7 +141,7 @@ dotnet test --logger "console;verbosity=normal"
 dotnet test /p:CollectCoverage=true /p:CoverageFormat=lcov
 ```
 
-**Current Status**: 165 tests passing ✅
+**Current Status**: 177 tests passing ✅
 
 ## File Structure
 
