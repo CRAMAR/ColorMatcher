@@ -20,6 +20,28 @@
                 <TextBlock Text="Enter target and sample colors to visualize in LAB space." Opacity="0.7" />
             </StackPanel>
 
+            <!-- Project Management -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Project" FontWeight="SemiBold" />
+                <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
+                    <StackPanel Spacing="12" Margin="12">
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                            <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                            <TextBox Text="{Binding ProjectName}" Grid.Row="0" Grid.Column="1" Watermark="Untitled Project" />
+
+                            <TextBlock Text="Description" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Margin="0,8,0,0" />
+                            <TextBox Text="{Binding ProjectDescription}" Grid.Row="1" Grid.Column="1" Watermark="Optional description" 
+                                     AcceptsReturn="True" Height="60" TextWrapping="Wrap" />
+                        </Grid>
+
+                        <UniformGrid Columns="2" HorizontalAlignment="Stretch">
+                            <Button Content="New Project" Command="{Binding CreateNewProjectCommand}" Margin="0,0,4,0" />
+                            <Button Content="Save Project" Command="{Binding SaveProjectCommand}" Margin="4,0,0,0" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
             <StackPanel Spacing="8">
                 <TextBlock Text="Reference Color (Target)" FontWeight="SemiBold" />
                 <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
@@ -69,6 +91,24 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
+
+            <!-- Accept Color Match -->
+            <Button Content="✓ Accept Match" 
+                    Command="{Binding SaveColorMatchCommand}" 
+                    HorizontalAlignment="Stretch"
+                    Height="40"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Background="#1B5E20"
+                    Foreground="White"
+                    CornerRadius="8"
+                    Margin="0,8,0,0">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#2E7D32" />
+                    </Style>
+                </Button.Styles>
+            </Button>
         </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -381,6 +382,139 @@ namespace ColorMatcher.Tests
             Assert.NotNull(vm.ReferenceR);
             Assert.NotNull(vm.ReferenceG);
             Assert.NotNull(vm.ReferenceB);
+        }
+
+        #endregion
+
+        #region PropertyChanged Notifications (Issue #13)
+
+        [Fact]
+        public void GraphModel_PropertyChanged_RaisedWhenReferenceColorUpdated()
+        {
+            var vm = CreateViewModel();
+            bool graphModelChangedEventRaised = false;
+
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.GraphModel))
+                {
+                    graphModelChangedEventRaised = true;
+                }
+            };
+
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "150";
+            vm.ReferenceB = "200";
+
+            Assert.True(graphModelChangedEventRaised, "GraphModel PropertyChanged should be raised when reference color is updated");
+        }
+
+        [Fact]
+        public void GraphModel_PropertyChanged_RaisedWhenSampleColorUpdated()
+        {
+            var vm = CreateViewModel();
+            bool graphModelChangedEventRaised = false;
+
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.GraphModel))
+                {
+                    graphModelChangedEventRaised = true;
+                }
+            };
+
+            vm.SampleR = "50";
+            vm.SampleG = "75";
+            vm.SampleB = "100";
+
+            Assert.True(graphModelChangedEventRaised, "GraphModel PropertyChanged should be raised when sample color is updated");
+        }
+
+        [Fact]
+        public void GraphModel_PropertyChanged_RaisedWhenHexColorUpdated()
+        {
+            var vm = CreateViewModel();
+            bool graphModelChangedEventRaised = false;
+
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.GraphModel))
+                {
+                    graphModelChangedEventRaised = true;
+                }
+            };
+
+            vm.ReferenceHex = "#FF5733";
+
+            Assert.True(graphModelChangedEventRaised, "GraphModel PropertyChanged should be raised when hex color is updated");
+        }
+
+        [Fact]
+        public void GraphModel_PropertyChanged_RaisedEvenWhenInvalidColorProvided()
+        {
+            var vm = CreateViewModel();
+            bool graphModelChangedEventRaised = false;
+
+            // Set valid initial color
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "100";
+            vm.ReferenceB = "100";
+
+            // Start listening after initial setup
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.GraphModel))
+                {
+                    graphModelChangedEventRaised = true;
+                }
+            };
+
+            // Try to set invalid value - PropertyChanged still fires but graph data may not update
+            vm.ReferenceR = "invalid";
+
+            Assert.True(graphModelChangedEventRaised, "GraphModel PropertyChanged should be raised even for invalid values (UpdateGraphData is still called)");
+        }
+
+        [Fact]
+        public void ColorDifference_PropertyChanged_RaisedWhenColorsUpdated()
+        {
+            var vm = CreateViewModel();
+            bool colorDifferenceChangedEventRaised = false;
+
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.ColorDifference))
+                {
+                    colorDifferenceChangedEventRaised = true;
+                }
+            };
+
+            vm.ReferenceR = "255";
+            vm.ReferenceG = "0";
+            vm.ReferenceB = "0";
+
+            Assert.True(colorDifferenceChangedEventRaised, "ColorDifference PropertyChanged should be raised when colors are updated");
+        }
+
+        [Fact]
+        public void TintRecommendation_PropertyChanged_RaisedWhenColorsUpdated()
+        {
+            var vm = CreateViewModel();
+            bool tintRecommendationChangedEventRaised = false;
+
+            vm.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(vm.TintRecommendation))
+                {
+                    tintRecommendationChangedEventRaised = true;
+                }
+            };
+
+            vm.SampleR = "200";
+            vm.SampleG = "50";
+            vm.SampleB = "100";
+
+            Assert.True(tintRecommendationChangedEventRaised, "TintRecommendation PropertyChanged should be raised when colors are updated");
         }
 
         #endregion
