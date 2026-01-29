@@ -164,6 +164,84 @@ namespace ColorMatcher.Tests
 
         #endregion
 
+        #region Match Notes and Accepted Status
+
+        [Fact]
+        public async Task SaveColorMatch_WithNotes_StoresNotesInHistory()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-match-notes");
+
+            vm.ProjectName = "Notes Test";
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "100";
+            vm.ReferenceB = "100";
+            vm.SampleR = "110";
+            vm.SampleG = "110";
+            vm.SampleB = "110";
+            vm.MatchNotes = "Added extra blue tint";
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.Equal("Added extra blue tint", vm.HistoryItems[0].Notes);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_WithoutNotes_UsesDefaultText()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-default-notes");
+
+            vm.ProjectName = "Default Notes Test";
+            vm.ReferenceR = "50";
+            vm.ReferenceG = "50";
+            vm.ReferenceB = "50";
+            vm.MatchNotes = "";  // Empty notes
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.Equal("Manual color match", vm.HistoryItems[0].Notes);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_WithIsAccepted_StoresAcceptedFlag()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-accepted");
+
+            vm.ProjectName = "Accepted Test";
+            vm.ReferenceR = "200";
+            vm.ReferenceG = "100";
+            vm.ReferenceB = "50";
+            vm.IsMatchAccepted = true;
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            Assert.Single(vm.HistoryItems);
+            Assert.True(vm.HistoryItems[0].IsAccepted);
+        }
+
+        [Fact]
+        public async Task SaveColorMatch_ClearsNotesAfterSaving()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-clear-notes");
+
+            vm.ProjectName = "Clear Notes Test";
+            vm.MatchNotes = "Test notes";
+            vm.IsMatchAccepted = false;
+
+            await vm.SaveColorMatchCommand.ExecuteAsync(null);
+
+            // Notes should be cleared and accepted reset to true
+            Assert.Empty(vm.MatchNotes);
+            Assert.True(vm.IsMatchAccepted);
+        }
+
+        #endregion
+
         #region Color Difference Calculations
 
         [Fact]
@@ -325,6 +403,50 @@ namespace ColorMatcher.Tests
             // Note: LoadRecentProjectsAsync would need to be called to populate the UI list
             
             Assert.NotNull(vm.CurrentProject);
+        }
+
+        [Fact]
+        public async Task RecentProjects_LoadsLimitedNumber()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-colors-recent");
+
+            // Create multiple projects
+            for (int i = 0; i < 15; i++)
+            {
+                vm.ProjectName = $"Test Project {i}";
+                await vm.CreateNewProjectCommand.ExecuteAsync(null);
+            }
+
+            // RecentProjects should be limited to 10
+            Assert.True(vm.RecentProjects.Count <= 10, "Recent projects should be limited to 10 items");
+        }
+
+        [Fact]
+        public async Task LoadProject_UpdatesCurrentProject()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-colors-load");
+
+            // Create and save a project
+            vm.ProjectName = "Original Project";
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "150";
+            vm.ReferenceB = "200";
+            await vm.CreateNewProjectCommand.ExecuteAsync(null);
+            var savedProject = vm.CurrentProject;
+
+            // Create a new project to change state
+            vm.ProjectName = "Different Project";
+            await vm.CreateNewProjectCommand.ExecuteAsync(null);
+
+            // Load the original project back
+            await vm.LoadProjectCommand.ExecuteAsync(savedProject);
+
+            Assert.Equal("Original Project", vm.ProjectName);
+            Assert.Equal("100", vm.ReferenceR);
+            Assert.Equal("150", vm.ReferenceG);
+            Assert.Equal("200", vm.ReferenceB);
         }
 
         #endregion

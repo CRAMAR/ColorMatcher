@@ -83,6 +83,12 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private bool isReadingColor = false;
 
+    [ObservableProperty]
+    private string matchNotes = "";
+
+    [ObservableProperty]
+    private bool isMatchAccepted = true;
+
     private bool isUpdatingReference;
     private bool isUpdatingSample;
 
@@ -393,11 +399,16 @@ public partial class MainWindowViewModel : ViewModelBase
 
         var historyEntry = new ColorHistoryEntry(refRgb, smpRgb, refLab.DeltaE(smpLab), TintRecommendation)
         {
-            Notes = "Manual color match"
+            Notes = string.IsNullOrWhiteSpace(MatchNotes) ? "Manual color match" : MatchNotes,
+            IsAccepted = IsMatchAccepted
         };
 
         await _repository.AddColorHistoryAsync(CurrentProject.Id, historyEntry);
         await RefreshHistoryAsync();
+
+        // Clear notes and reset accepted flag for next match
+        MatchNotes = "";
+        IsMatchAccepted = true;
     }
 
     /// <summary>
