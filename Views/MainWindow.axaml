@@ -1,9 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:ColorMatcher.ViewModels"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        xmlns:v="using:ColorMatcher.Views"
     x:Class="ColorMatcher.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/avalonia-logo.ico"
@@ -76,11 +74,11 @@
         <Border Grid.Column="1" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
             <StackPanel Margin="24" Spacing="12">
                 <TextBlock Text="LAB Color Space" FontSize="20" FontWeight="SemiBold" />
-                <TextBlock Text="Graph placeholder: reference and sample points will render here." Opacity="0.7" />
-                <Border Height="420" CornerRadius="8" BorderBrush="#3A3A3A" BorderThickness="1" Background="#1C1C1C">
-                    <TextBlock Text="LAB Graph (coming soon)" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.6" />
-                </Border>
-                <TextBlock Text="Tint guidance will appear once LAB conversion is implemented." Opacity="0.7" />
+                <v:LabColorGraph x:Name="LabGraph" Height="420" />
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding ColorDifference, StringFormat='ΔE: {0:F2}'}" FontSize="12" />
+                    <TextBlock Text="{Binding TintRecommendation}" Foreground="#90CAF9" FontSize="11" />
+                </StackPanel>
             </StackPanel>
         </Border>
     </Grid>
