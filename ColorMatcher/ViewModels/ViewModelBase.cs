@@ -21,13 +21,13 @@ namespace ColorMatcher.ViewModels;
 /// 
 /// By inheriting from ObservableObject, all view models automatically get:
 /// 1. INotifyPropertyChanged implementation for property change notifications
-/// 2. Relay command support via @RelayCommand attribute
-/// 3. Observable property support via @ObservableProperty attribute
+/// 2. Relay command support via [RelayCommand] attribute
+/// 3. Observable property support via [ObservableProperty] attribute
 /// 4. Built-in change detection for MVVM Toolkit features
 /// 
 /// **Usage**
 /// 
-/// All view model classes should inherit from ViewModelBase and use @ObservableProperty
+/// All view model classes should inherit from ViewModelBase and use [ObservableProperty]
 /// for properties that need to notify the UI:
 /// 
 /// ```csharp

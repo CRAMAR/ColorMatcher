@@ -28,9 +28,9 @@ namespace ColorMatcher.Models;
 /// 
 /// Example usage:
 /// <code>
-/// var ref_lab = new LabColor(50, 20, 30);
-/// var sample_lab = new LabColor(48, 22, 28);
-/// double deltaE = ref_lab.DeltaE(sample_lab); // ~2.83
+/// var refLab = new LabColor(50, 20, 30);
+/// var sampleLab = new LabColor(48, 22, 28);
+/// double deltaE = refLab.DeltaE(sampleLab); // ~2.83
 /// if (deltaE < 5) Console.WriteLine("Good color match!");
 /// </code>
 /// </remarks>
