@@ -22,8 +22,10 @@
                 <TextBlock Text="Enter target and sample colors to visualize in LAB space." Opacity="0.7" />
             </StackPanel>
 
-            <GroupBox Header="Reference Color (Target)">
-                <StackPanel Spacing="12" Margin="12">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Reference Color (Target)" FontWeight="SemiBold" />
+                <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
+                    <StackPanel Spacing="12" Margin="12">
                     <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
                         <TextBlock Text="Hex" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
                         <TextBox Text="{Binding ReferenceHex}" Grid.Row="0" Grid.Column="1" Watermark="#FFFFFF" />
@@ -41,11 +43,14 @@
                     <Border Height="72" CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="{Binding ReferenceBrush}">
                         <TextBlock Text="Reference" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" />
                     </Border>
-                </StackPanel>
-            </GroupBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
 
-            <GroupBox Header="Sample Color">
-                <StackPanel Spacing="12" Margin="12">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Sample Color" FontWeight="SemiBold" />
+                <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
+                    <StackPanel Spacing="12" Margin="12">
                     <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
                         <TextBlock Text="Hex" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
                         <TextBox Text="{Binding SampleHex}" Grid.Row="0" Grid.Column="1" Watermark="#808080" />
@@ -63,8 +68,9 @@
                     <Border Height="72" CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="{Binding SampleBrush}">
                         <TextBlock Text="Sample" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" />
                     </Border>
-                </StackPanel>
-            </GroupBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </StackPanel>
 
         <Border Grid.Column="1" Margin="24,0,0,0" CornerRadius="12" BorderBrush="#2E2E2E" BorderThickness="1" Background="#141414">
