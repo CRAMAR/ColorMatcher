@@ -327,6 +327,50 @@ namespace ColorMatcher.Tests
             Assert.NotNull(vm.CurrentProject);
         }
 
+        [Fact]
+        public async Task RecentProjects_LoadsLimitedNumber()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-colors-recent");
+
+            // Create multiple projects
+            for (int i = 0; i < 15; i++)
+            {
+                vm.ProjectName = $"Test Project {i}";
+                await vm.CreateNewProjectCommand.ExecuteAsync(null);
+            }
+
+            // RecentProjects should be limited to 10
+            Assert.True(vm.RecentProjects.Count <= 10, "Recent projects should be limited to 10 items");
+        }
+
+        [Fact]
+        public async Task LoadProject_UpdatesCurrentProject()
+        {
+            var vm = CreateViewModel();
+            await vm.InitializeWithFileRepositoryAsync("/tmp/test-colors-load");
+
+            // Create and save a project
+            vm.ProjectName = "Original Project";
+            vm.ReferenceR = "100";
+            vm.ReferenceG = "150";
+            vm.ReferenceB = "200";
+            await vm.CreateNewProjectCommand.ExecuteAsync(null);
+            var savedProject = vm.CurrentProject;
+
+            // Create a new project to change state
+            vm.ProjectName = "Different Project";
+            await vm.CreateNewProjectCommand.ExecuteAsync(null);
+
+            // Load the original project back
+            await vm.LoadProjectCommand.ExecuteAsync(savedProject);
+
+            Assert.Equal("Original Project", vm.ProjectName);
+            Assert.Equal("100", vm.ReferenceR);
+            Assert.Equal("150", vm.ReferenceG);
+            Assert.Equal("200", vm.ReferenceB);
+        }
+
         #endregion
 
         #region Export/Import
