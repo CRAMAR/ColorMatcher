@@ -1,0 +1,213 @@
+\doxysection{Color\+Matcher.\+Models.\+Lab\+Color\+Graph\+Model Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1LabColorGraphModel}{}\label{classColorMatcher_1_1Models_1_1LabColorGraphModel}\index{ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}}
+
+
+Represents color matching data and algorithms for visualization in LAB color space.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColorGraphModel_a5679b09d0e703f3efc3f7e8bb4217224}{Get\+Color\+Difference}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the color difference (ΔE) between reference and sample colors. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColorGraphModel_af7e1ea71996d3c32bb54acd6c5bb8d2c}{Get\+Tint\+Recommendation}} ()
+\begin{DoxyCompactList}\small\item\em Generates a tint recommendation based on color differences in a\texorpdfstring{$\ast$}{*} and b\texorpdfstring{$\ast$}{*} channels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColorGraphModel_a17b0d59e9892aeb864786ca2478bcb5a}{Reference\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The reference (target) color in LAB color space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColorGraphModel_a74af901e3edc182a1fc13b81c13af60f}{Sample\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The sample (candidate) color in LAB color space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents color matching data and algorithms for visualization in LAB color space. 
+
+This model serves as the data bridge between the View\+Model\textquotesingle{}s RGB color inputs and the perceptually-\/meaningful calculations needed for color matching guidance. It maintains reference (target) and sample (candidate) colors in LAB space and provides methods for\+:
+\begin{DoxyItemize}
+\item Calculating ΔE (color difference)
+\item Generating tint recommendations (which direction to adjust)
+\item Supporting real-\/time color matching feedback
+\end{DoxyItemize}
+
+{\bfseries{LAB Color Space Overview}}
+
+LAB is a device-\/independent, perceptually uniform color space defined by the CIE\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{L\texorpdfstring{$\ast$}{*} (Lightness)}}\+: 0-\/100, where 0 is black and 100 is white
+\item {\bfseries{a\texorpdfstring{$\ast$}{*} (Red-\/\+Green)}}\+: -\/128 to +127, where negative = green, positive = red
+\item {\bfseries{b\texorpdfstring{$\ast$}{*} (Yellow-\/\+Blue)}}\+: -\/128 to +127, where negative = blue, positive = yellow
+\end{DoxyItemize}
+
+{\bfseries{Perceptual Uniformity}}
+
+A key advantage of LAB\+: Equal distance in LAB space ≈ Equal perceived color difference to human observers. This is NOT true for RGB (where (255,0,0) and (254,0,0) are imperceptible in difference, but (0,0,255) and (0,0,0) are obviously different).
+
+{\bfseries{Color Difference Algorithm}}
+
+ΔE = √((Δ\+L\texorpdfstring{$\ast$}{*})² + (Δa\texorpdfstring{$\ast$}{*})² + (Δb\texorpdfstring{$\ast$}{*})²)
+
+This is the CIE76 formula (Euclidean distance in LAB space).
+
+Interpretation\+:
+\begin{DoxyItemize}
+\item \texorpdfstring{$<$}{<} 1\+: Imperceptible to human eye
+\item 1-\/2\+: Barely perceptible
+\item 2-\/5\+: Perceptible but acceptable
+\item 5-\/10\+: Significant, likely unacceptable
+\item \texorpdfstring{$>$}{>} 10\+: Very obvious mismatch
+\end{DoxyItemize}
+
+Modern color science also uses CIE94 and CIEDE2000 (which weight channels differently), but CIE76 is adequate for this application and faster to compute.
+
+{\bfseries{Tint Recommendation Algorithm}}
+
+The recommendation system guides users on how to adjust sample colors to match reference\+:
+
+
+\begin{DoxyEnumerate}
+\item If \texorpdfstring{$\vert$}{|}Δ\+L\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}Δa\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}Δb\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} \texorpdfstring{$<$}{<} 0.\+5\+: "{}\+Colors are very close"{} (imperceptible difference)
+\item For each channel\+:
+\begin{DoxyItemize}
+\item a\texorpdfstring{$\ast$}{*} channel (Red-\/\+Green axis)\+:
+\begin{DoxyItemize}
+\item If Δa\texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>} 5\+: Recommend "{}\+Add Red"{} (sample too green, needs red)
+\item If Δa\texorpdfstring{$\ast$}{*} \texorpdfstring{$<$}{<} -\/5\+: Recommend "{}\+Add Green"{} (sample too red, needs green)
+\end{DoxyItemize}
+\item b\texorpdfstring{$\ast$}{*} channel (Yellow-\/\+Blue axis)\+:
+\begin{DoxyItemize}
+\item If Δb\texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>} 5\+: Recommend "{}\+Add Yellow"{} (sample too blue, needs yellow)
+\item If Δb\texorpdfstring{$\ast$}{*} \texorpdfstring{$<$}{<} -\/5\+: Recommend "{}\+Add Blue"{} (sample too yellow, needs blue)
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item Combine recommendations\+:
+\begin{DoxyItemize}
+\item Multi-\/axis\+: "{}\+Add Red, Add Yellow"{} (if both axes need adjustment \texorpdfstring{$>$}{>} 5)
+\item Single-\/axis\+: "{}\+Add Red"{} (if only one axis needs adjustment \texorpdfstring{$>$}{>} 5)
+\item Fine-\/tune\+: "{}\+Fine adjustments needed"{} (if changes needed but \texorpdfstring{$<$}{<} 5 on all axes)
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Threshold Selection (5 units)\+: The threshold of 5 units was chosen empirically\+:
+\begin{DoxyItemize}
+\item Too low\+: Generates recommendations too frequently for imperceptible differences
+\item Too high\+: Misses observable differences
+\item 5 units\+: \texorpdfstring{$\sim$}{\string~}2 perceptible units on a\texorpdfstring{$\ast$}{*} or b\texorpdfstring{$\ast$}{*} axis, practical for paint/dye adjustment
+\end{DoxyItemize}
+
+{\bfseries{Recommendation Accuracy}}
+
+Recommendations are designed to be intuitive for users without color science background\+:
+\begin{DoxyItemize}
+\item "{}\+Add Red"{}\+: Red pigment should be added to sample
+\item "{}\+Add Green"{}\+: Green pigment (or reduce red) should be added to sample
+\item "{}\+Add Yellow"{}\+: Yellow pigment should be added to sample
+\item "{}\+Add Blue"{}\+: Blue pigment should be added to sample
+\end{DoxyItemize}
+
+This quadrant-\/based approach provides actionable guidance without requiring users to understand LAB space mathematics. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColorGraphModel_a5679b09d0e703f3efc3f7e8bb4217224}\label{classColorMatcher_1_1Models_1_1LabColorGraphModel_a5679b09d0e703f3efc3f7e8bb4217224} 
+\index{ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}!GetColorDifference@{GetColorDifference}}
+\index{GetColorDifference@{GetColorDifference}!ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}}
+\doxysubsubsection{\texorpdfstring{GetColorDifference()}{GetColorDifference()}}
+{\footnotesize\ttfamily double Color\+Matcher.\+Models.\+Lab\+Color\+Graph\+Model.\+Get\+Color\+Difference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the color difference (ΔE) between reference and sample colors. 
+
+Uses the CIE76 formula\+: ΔE = √((Δ\+L\texorpdfstring{$\ast$}{*})² + (Δa\texorpdfstring{$\ast$}{*})² + (Δb\texorpdfstring{$\ast$}{*})²) This is the Euclidean distance between two points in LAB color space.
+
+\begin{DoxyReturn}{Returns}
+ΔE value (0-\/100+)\+:
+\begin{DoxyItemize}
+\item 0\+: Colors are identical
+\item \texorpdfstring{$<$}{<} 1\+: Imperceptible to human eye
+\item 1-\/2\+: Barely perceptible
+\item 2-\/5\+: Perceptible but acceptable
+\item 5-\/10\+: Significant difference, likely unacceptable
+\item \texorpdfstring{$>$}{>} 10\+: Very obvious mismatch
+\item 0 if either color is null (incomplete input) 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColorGraphModel_af7e1ea71996d3c32bb54acd6c5bb8d2c}\label{classColorMatcher_1_1Models_1_1LabColorGraphModel_af7e1ea71996d3c32bb54acd6c5bb8d2c} 
+\index{ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}!GetTintRecommendation@{GetTintRecommendation}}
+\index{GetTintRecommendation@{GetTintRecommendation}!ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}}
+\doxysubsubsection{\texorpdfstring{GetTintRecommendation()}{GetTintRecommendation()}}
+{\footnotesize\ttfamily string Color\+Matcher.\+Models.\+Lab\+Color\+Graph\+Model.\+Get\+Tint\+Recommendation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generates a tint recommendation based on color differences in a\texorpdfstring{$\ast$}{*} and b\texorpdfstring{$\ast$}{*} channels. 
+
+Analyzes the LAB color difference and provides intuitive guidance on how to adjust the sample color to match the reference. Recommendations are based on thresholds in the a\texorpdfstring{$\ast$}{*} (red-\/green) and b\texorpdfstring{$\ast$}{*} (yellow-\/blue) axes.
+
+{\bfseries{Recommendation Examples}}
+\begin{DoxyItemize}
+\item "{}\+Add Red, Add Yellow"{}\+: Sample is too green and too blue; add red and yellow
+\item "{}\+Add Green"{}\+: Sample is too red; add green (or reduce red intensity)
+\item "{}\+Fine adjustments needed"{}\+: Small differences (\texorpdfstring{$<$}{<}5) on one or both axes
+\item "{}\+Colors are very close"{}\+: Imperceptible difference (\texorpdfstring{$\vert$}{|}Δ\+L\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}Δa\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}Δb\texorpdfstring{$\ast$}{*}\texorpdfstring{$\vert$}{|} \texorpdfstring{$<$}{<} 0.\+5)
+\item "{}\+Enter both colors"{}\+: Missing reference or sample color
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+Human-\/readable recommendation string suitable for UI display without further processing. 
+\end{DoxyReturn}
+
+
+{\bfseries{Channel Interpretation}}
+\begin{DoxyItemize}
+\item Δa\texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>} 5\+: Sample is too green, needs red added
+\item Δa\texorpdfstring{$\ast$}{*} \texorpdfstring{$<$}{<} -\/5\+: Sample is too red, needs green added
+\item Δb\texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>} 5\+: Sample is too blue, needs yellow added
+\item Δb\texorpdfstring{$\ast$}{*} \texorpdfstring{$<$}{<} -\/5\+: Sample is too yellow, needs blue added
+\end{DoxyItemize}
+
+Multiple recommendations are comma-\/separated when adjustments are needed on multiple axes. 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColorGraphModel_a17b0d59e9892aeb864786ca2478bcb5a}\label{classColorMatcher_1_1Models_1_1LabColorGraphModel_a17b0d59e9892aeb864786ca2478bcb5a} 
+\index{ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}!ReferenceColor@{ReferenceColor}}
+\index{ReferenceColor@{ReferenceColor}!ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}}
+\doxysubsubsection{\texorpdfstring{ReferenceColor}{ReferenceColor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? Color\+Matcher.\+Models.\+Lab\+Color\+Graph\+Model.\+Reference\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The reference (target) color in LAB color space. 
+
+This is the "{}goal"{} color the user is trying to match. Set by the View\+Model when the user enters a reference color. Null if no reference color has been set or if the reference RGB values are invalid.
+
+Used for\+:
+\begin{DoxyItemize}
+\item DeltaE calculation (color difference from sample)
+\item Tint recommendations (how to adjust sample toward reference)
+\item Visualization in matching UI 
+\end{DoxyItemize}\Hypertarget{classColorMatcher_1_1Models_1_1LabColorGraphModel_a74af901e3edc182a1fc13b81c13af60f}\label{classColorMatcher_1_1Models_1_1LabColorGraphModel_a74af901e3edc182a1fc13b81c13af60f} 
+\index{ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}!SampleColor@{SampleColor}}
+\index{SampleColor@{SampleColor}!ColorMatcher.Models.LabColorGraphModel@{ColorMatcher.Models.LabColorGraphModel}}
+\doxysubsubsection{\texorpdfstring{SampleColor}{SampleColor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? Color\+Matcher.\+Models.\+Lab\+Color\+Graph\+Model.\+Sample\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The sample (candidate) color in LAB color space. 
+
+This is the "{}current attempt"{} color the user is evaluating for matching. Set by the View\+Model when the user enters a sample color. Null if no sample color has been set or if the sample RGB values are invalid.
+
+Used for\+:
+\begin{DoxyItemize}
+\item DeltaE calculation (difference from reference)
+\item Tint recommendations (direction to adjust)
+\item Matching feedback to user 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Lab\+Color\+Graph\+Model.\+cs\end{DoxyCompactItemize}

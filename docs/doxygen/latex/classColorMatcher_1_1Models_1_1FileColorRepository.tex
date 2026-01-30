@@ -1,0 +1,465 @@
+\doxysection{Color\+Matcher.\+Models.\+File\+Color\+Repository Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository}{}\label{classColorMatcher_1_1Models_1_1FileColorRepository}\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+
+
+File-\/based implementation of IColor\+Repository that persists color projects to JSON files.  
+
+
+
+
+Inheritance diagram for Color\+Matcher.\+Models.\+File\+Color\+Repository\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classColorMatcher_1_1Models_1_1FileColorRepository__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Color\+Matcher.\+Models.\+File\+Color\+Repository\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classColorMatcher_1_1Models_1_1FileColorRepository__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a42a7ec1adc5c2b12da0e8058ef5bb7db}{File\+Color\+Repository}} (string projects\+Directory)
+\begin{DoxyCompactList}\small\item\em Creates a new File\+Color\+Repository for the specified directory. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a006484e7bced23ad074ad5371c0e80a5}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a006484e7bced23ad074ad5371c0e80a5} 
+async Task {\bfseries Load\+All\+Projects\+Async} ()
+\begin{DoxyCompactList}\small\item\em Loads all projects from disk into memory. Should be called once on application startup. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a73a9bc7dec0613e2934850023740d0dc}{Create\+Project\+Async}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} project)
+\begin{DoxyCompactList}\small\item\em Creates a new color project and persists it. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}?$>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_ab1936ee4458507fb8374279019ec9baf}{Get\+Project\+Async}} (string project\+Id)
+\begin{DoxyCompactList}\small\item\em Retrieves a project by its unique identifier. \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a0014657d89472bf441ea9e49c7b4f05b}{Get\+All\+Projects\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all projects stored in the repository. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a34ddb5a53e624f78f60d63d95e42d546}{Update\+Project\+Async}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} project)
+\begin{DoxyCompactList}\small\item\em Updates an existing project with new values. \end{DoxyCompactList}\item 
+async Task$<$ bool $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a65958ac99d76fe7e1bcc4519e70cb5b8}{Delete\+Project\+Async}} (string project\+Id)
+\begin{DoxyCompactList}\small\item\em Deletes a project and all associated data from the repository. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_ae1b9bd0a47e859f93604f5f0b6d30fd8}{Add\+Color\+History\+Async}} (string project\+Id, \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} color\+Entry)
+\begin{DoxyCompactList}\small\item\em Adds a new color history entry to a project\textquotesingle{}s history. \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} $>$ $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a47d6eadfd02f45b97032300caecb6c74}{Get\+Color\+History\+Async}} (string project\+Id)
+\begin{DoxyCompactList}\small\item\em Retrieves complete color history for a specific project. \end{DoxyCompactList}\item 
+async Task$<$ bool $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a22c9c32da634d491db87cf58acf53dfc}{Clear\+Color\+History\+Async}} (string project\+Id)
+\begin{DoxyCompactList}\small\item\em Removes all color history entries for a project. \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a3c0bd831d44600f873e7838696a4764e}{Export\+Project\+As\+Json\+Async}} (string project\+Id)
+\begin{DoxyCompactList}\small\item\em Exports a project to JSON format for external use or backup. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository_a4dce0fa55b66c832b4fe82b64b243e7c}{Import\+Project\+From\+Json\+Async}} (string json\+Data)
+\begin{DoxyCompactList}\small\item\em Imports a project from JSON format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File-\/based implementation of IColor\+Repository that persists color projects to JSON files. 
+
+Stores each Color\+Project as a separate JSON file in a specified directory, with complete history of all color matching attempts (Color\+History\+Entry) preserved.
+
+{\bfseries{Persistence Architecture}}
+
+This implementation uses a hybrid approach\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Disk I/O}}\+: JSON files for durable persistence
+\item {\bfseries{In-\/\+Memory Cache}}\+: In\+Memory\+Color\+Repository for fast access
+\end{DoxyEnumerate}
+
+Design rationale\+:
+\begin{DoxyItemize}
+\item All projects loaded from disk into memory on application startup
+\item Subsequent reads come from fast in-\/memory cache
+\item Writes go to both memory and disk for consistency
+\item Thread-\/safe via internal locking
+\end{DoxyItemize}
+
+{\bfseries{File Organization}}
+
+Directory structure\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ProjectsDirectory/}
+\DoxyCodeLine{\ \ ├──\ 123e4567-\/e89b-\/12d3-\/a456-\/426614174000.json}
+\DoxyCodeLine{\ \ ├──\ 234e5678-\/f89b-\/12d3-\/a456-\/426614174001.json}
+\DoxyCodeLine{\ \ └──\ 345e6789-\/g89b-\/12d3-\/a456-\/426614174002.json}
+
+\end{DoxyCode}
+
+
+Filename = Project\+Id.\+json (GUID-\/based for uniqueness) Format = JSON containing complete Color\+Project with all Color\+History\+Entry records
+
+{\bfseries{JSON Schema}}
+
+Each file contains serialized Color\+Project\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ "{}id"{}:\ "{}123e4567-\/e89b-\/12d3-\/a456-\/426614174000"{},}
+\DoxyCodeLine{\ \ "{}name"{}:\ "{}Ferrari\ Red\ Match"{},}
+\DoxyCodeLine{\ \ "{}description"{}:\ "{}Matching\ paint\ for\ custom\ car\ project"{},}
+\DoxyCodeLine{\ \ "{}referenceColor"{}:\ \{\ "{}R"{}:\ 255,\ "{}G"{}:\ 0,\ "{}B"{}:\ 0\ \},}
+\DoxyCodeLine{\ \ "{}sampleColor"{}:\ \{\ "{}R"{}:\ 254,\ "{}G"{}:\ 1,\ "{}B"{}:\ 2\ \},}
+\DoxyCodeLine{\ \ "{}createdAt"{}:\ "{}2024-\/01-\/15T10:30:00Z"{},}
+\DoxyCodeLine{\ \ "{}modifiedAt"{}:\ "{}2024-\/01-\/15T10:35:00Z"{},}
+\DoxyCodeLine{\ \ "{}colorHistory"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ "{}id"{}:\ "{}456e7890-\/..."{},}
+\DoxyCodeLine{\ \ \ \ \ \ "{}referenceColor"{}:\ \{\ "{}R"{}:\ 255,\ "{}G"{}:\ 0,\ "{}B"{}:\ 0\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ "{}sampleColor"{}:\ \{\ "{}R"{}:\ 255,\ "{}G"{}:\ 0,\ "{}B"{}:\ 5\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ "{}deltaE"{}:\ 5.2,}
+\DoxyCodeLine{\ \ \ \ \ \ ...}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Initialization Flow}}
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Constructor}}\+: Accepts Projects\+Directory path, creates if missing
+\item {\bfseries{Load\+All\+Projects\+Async()}}\+: Called once on startup, loads all JSON files into memory
+\item {\bfseries{Normal Operations}}\+: Read from memory, write to both memory and disk
+\item {\bfseries{Thread Safety}}\+: Internal lock prevents concurrent modifications
+\end{DoxyEnumerate}
+
+Typical startup code\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ repo\ =\ \textcolor{keyword}{new}\ FileColorRepository(\textcolor{stringliteral}{@"{}C:\(\backslash\)Users\(\backslash\)Me\(\backslash\)ColorMatcher\(\backslash\)Projects"{}});}
+\DoxyCodeLine{await\ repo.LoadAllProjectsAsync();\ \textcolor{comment}{//\ Load\ from\ disk}}
+\DoxyCodeLine{var\ projects\ =\ await\ repo.GetAllProjectsAsync();\ \textcolor{comment}{//\ Now\ in\ memory,\ fast}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Performance}}
+
+
+\begin{DoxyItemize}
+\item First reads\+: \texorpdfstring{$\sim$}{\string~}1-\/100ms per project (disk I/O dependent on file size)
+\item Subsequent reads\+: \texorpdfstring{$<$}{<}1ms (memory lookup)
+\item Writes\+: \texorpdfstring{$\sim$}{\string~}5-\/50ms (JSON serialization + disk I/O)
+\item Bulk operations\+: O(n) for n projects
+\end{DoxyItemize}
+
+{\bfseries{Durability Guarantees}}
+
+
+\begin{DoxyItemize}
+\item All projects persisted to disk immediately after save
+\item No data loss between sessions (all data written to JSON)
+\item History preserved completely (all Color\+History\+Entry records saved)
+\item Thread-\/safe writes ensure consistency even with concurrent operations
+\end{DoxyItemize}
+
+{\bfseries{Limitations}}
+
+
+\begin{DoxyItemize}
+\item Not optimized for huge projects (\texorpdfstring{$>$}{>}10,000 history entries)
+\item No encryption (plain JSON files)
+\item No versioning or backup mechanism (user responsible)
+\item No automatic cleanup of deleted files
+\end{DoxyItemize}
+
+For cloud-\/based sync, network drive, or encrypted storage, consider implementing alternative IColor\+Repository implementations (e.\+g., Database\+Color\+Repository, Cloud\+Color\+Repository). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a42a7ec1adc5c2b12da0e8058ef5bb7db}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a42a7ec1adc5c2b12da0e8058ef5bb7db} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!FileColorRepository@{FileColorRepository}}
+\index{FileColorRepository@{FileColorRepository}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{FileColorRepository()}{FileColorRepository()}}
+{\footnotesize\ttfamily Color\+Matcher.\+Models.\+File\+Color\+Repository.\+File\+Color\+Repository (\begin{DoxyParamCaption}\item[{string}]{projects\+Directory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new File\+Color\+Repository for the specified directory. 
+
+The directory will be created automatically if it doesn\textquotesingle{}t exist. Project\+Ids become filenames with .json extension for easy discovery.
+
+
+\begin{DoxyParams}{Parameters}
+{\em projects\+Directory} & File system path where JSON projects are stored (e.\+g., "{}\+C\+:\textbackslash{}\+Users\textbackslash{}\+Me\textbackslash{}\+Color\+Matcher\textbackslash{}\+Projects"{} on Windows or "{}\texorpdfstring{$\sim$}{\string~}/\+Color\+Matcher/\+Projects"{} on Linux/mac\+OS)\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & If projects\+Directory is null or empty\\
+\hline
+\end{DoxyExceptions}
+
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ repo\ =\ \textcolor{keyword}{new}\ FileColorRepository(\textcolor{stringliteral}{@"{}./data/projects"{}});}
+\DoxyCodeLine{\textcolor{comment}{//\ Creates\ ./data/projects\ directory\ if\ missing}}
+\DoxyCodeLine{\textcolor{comment}{//\ Ready\ to\ load/save\ projects\ to\ *.json\ files\ in\ that\ directory}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_ae1b9bd0a47e859f93604f5f0b6d30fd8}\label{classColorMatcher_1_1Models_1_1FileColorRepository_ae1b9bd0a47e859f93604f5f0b6d30fd8} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!AddColorHistoryAsync@{AddColorHistoryAsync}}
+\index{AddColorHistoryAsync@{AddColorHistoryAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{AddColorHistoryAsync()}{AddColorHistoryAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Add\+Color\+History\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id,  }\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}}}]{color\+Entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a new color history entry to a project\textquotesingle{}s history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The project ID to add history to\\
+\hline
+{\em color\+Entry} & The color matching attempt to record\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created color entry, potentially with auto-\/generated fields like Id and Created\+At. Entry is now persisted and included in project history. 
+\end{DoxyReturn}
+
+
+Called each time user saves a color match attempt. Automatically loads project, adds entry, and saves back to storage. This is the primary method for building color matching history over time. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a750336863f2f42b1caee3842b0ac2fe9}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a22c9c32da634d491db87cf58acf53dfc}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a22c9c32da634d491db87cf58acf53dfc} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!ClearColorHistoryAsync@{ClearColorHistoryAsync}}
+\index{ClearColorHistoryAsync@{ClearColorHistoryAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{ClearColorHistoryAsync()}{ClearColorHistoryAsync()}}
+{\footnotesize\ttfamily async Task$<$ bool $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Clear\+Color\+History\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes all color history entries for a project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The project ID to clear history for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if history was successfully cleared. False if project not found or already had no history. 
+\end{DoxyReturn}
+
+
+Called by user "{}\+Clear History"{} action. Preserves project but resets Color\+History list to empty. Project itself (name, reference color, sample color) is preserved. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a7638329598d27f4993ba4f51e025cad5}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a73a9bc7dec0613e2934850023740d0dc}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a73a9bc7dec0613e2934850023740d0dc} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!CreateProjectAsync@{CreateProjectAsync}}
+\index{CreateProjectAsync@{CreateProjectAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{CreateProjectAsync()}{CreateProjectAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Create\+Project\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}}]{project }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new color project and persists it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project} & The color project to create. Must have a unique Id.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created project. May include auto-\/generated fields like timestamps. Project is now persisted and can be retrieved via Get\+Project\+Async. 
+\end{DoxyReturn}
+
+
+Creates the project in the underlying storage (file, database, etc.). If a project with the same ID already exists, behavior depends on implementation\+:
+\begin{DoxyItemize}
+\item File\+Color\+Repository\+: Creates in new file (overwrites existing)
+\item In\+Memory\+Color\+Repository\+: Stores in dictionary 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_ad965da5a957b2f8d6436b88666be5e05}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a65958ac99d76fe7e1bcc4519e70cb5b8}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a65958ac99d76fe7e1bcc4519e70cb5b8} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!DeleteProjectAsync@{DeleteProjectAsync}}
+\index{DeleteProjectAsync@{DeleteProjectAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{DeleteProjectAsync()}{DeleteProjectAsync()}}
+{\footnotesize\ttfamily async Task$<$ bool $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Delete\+Project\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deletes a project and all associated data from the repository. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The project ID to delete\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if project was successfully deleted. False if project with given ID was not found. 
+\end{DoxyReturn}
+
+
+Removes project file (in file-\/based implementation) or database record. This operation is typically permanent and non-\/recoverable. All associated color history is also deleted. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a531aac32f5467b8faa90808b48f5ff1f}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a3c0bd831d44600f873e7838696a4764e}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a3c0bd831d44600f873e7838696a4764e} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!ExportProjectAsJsonAsync@{ExportProjectAsJsonAsync}}
+\index{ExportProjectAsJsonAsync@{ExportProjectAsJsonAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{ExportProjectAsJsonAsync()}{ExportProjectAsJsonAsync()}}
+{\footnotesize\ttfamily async Task$<$ string $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Export\+Project\+As\+Json\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Exports a project to JSON format for external use or backup. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The project ID to export\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+JSON string containing complete project data including all history. Can be saved to file, sent via email, or stored in version control. 
+\end{DoxyReturn}
+
+
+Used for\+:
+\begin{DoxyItemize}
+\item Backup/archival purposes
+\item Sharing projects with others
+\item Version control (Git) compatibility
+\item Data portability
+\end{DoxyItemize}
+
+Recommended JSON structure includes all project fields and complete Color\+History. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a7105a119caf5bac034a9b40578e3fa9a}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a0014657d89472bf441ea9e49c7b4f05b}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a0014657d89472bf441ea9e49c7b4f05b} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!GetAllProjectsAsync@{GetAllProjectsAsync}}
+\index{GetAllProjectsAsync@{GetAllProjectsAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{GetAllProjectsAsync()}{GetAllProjectsAsync()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Get\+All\+Projects\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves all projects stored in the repository. 
+
+\begin{DoxyReturn}{Returns}
+Collection of all color projects. Empty if no projects exist. Projects are typically ordered by Modified\+At (most recent first) for UI display. 
+\end{DoxyReturn}
+
+
+Used for populating "{}\+Recent Projects"{} list in application. May be expensive for large numbers of projects -\/ consider pagination for future enhancement. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_ac6f4d5907025823626571ea69b615cd0}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a47d6eadfd02f45b97032300caecb6c74}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a47d6eadfd02f45b97032300caecb6c74} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!GetColorHistoryAsync@{GetColorHistoryAsync}}
+\index{GetColorHistoryAsync@{GetColorHistoryAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{GetColorHistoryAsync()}{GetColorHistoryAsync()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} $>$ $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Get\+Color\+History\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves complete color history for a specific project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The project ID\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Collection of color history entries for this project. Typically ordered by Created\+At (oldest to newest or reverse). Empty if project has no history. 
+\end{DoxyReturn}
+
+
+Used to display color history in Data\+Grid on UI. Each entry contains reference color, sample color, ΔE, and recommendation. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a050be05801c88df2440efbb3aa88e0d8}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_ab1936ee4458507fb8374279019ec9baf}\label{classColorMatcher_1_1Models_1_1FileColorRepository_ab1936ee4458507fb8374279019ec9baf} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!GetProjectAsync@{GetProjectAsync}}
+\index{GetProjectAsync@{GetProjectAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{GetProjectAsync()}{GetProjectAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}?$>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Get\+Project\+Async (\begin{DoxyParamCaption}\item[{string}]{project\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves a project by its unique identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project\+Id} & The unique project identifier (typically GUID)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The color project if found, including full Color\+History. Returns null if project with given ID doesn\textquotesingle{}t exist. 
+\end{DoxyReturn}
+
+
+Loads the complete project from storage including all associated color history. This is typically the first operation when user opens an existing project. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_ac9703d13a166119d1b65be5b395999ab}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a4dce0fa55b66c832b4fe82b64b243e7c}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a4dce0fa55b66c832b4fe82b64b243e7c} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!ImportProjectFromJsonAsync@{ImportProjectFromJsonAsync}}
+\index{ImportProjectFromJsonAsync@{ImportProjectFromJsonAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{ImportProjectFromJsonAsync()}{ImportProjectFromJsonAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Import\+Project\+From\+Json\+Async (\begin{DoxyParamCaption}\item[{string}]{json\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Imports a project from JSON format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Data} & JSON string containing project data\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The imported project with all data restored
+\end{DoxyReturn}
+
+
+Inverse operation of Export\+Project\+As\+Json\+Async. Parses JSON and creates new project in repository. Used for\+:
+\begin{DoxyItemize}
+\item Restoring from backups
+\item Receiving shared projects
+\item Migrating from other systems
+\end{DoxyItemize}
+
+Typically generates new ID for imported project to avoid conflicts with existing projects. 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_a5e39d53cbd805b66b3eac3b3d940e0fd}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1FileColorRepository_a34ddb5a53e624f78f60d63d95e42d546}\label{classColorMatcher_1_1Models_1_1FileColorRepository_a34ddb5a53e624f78f60d63d95e42d546} 
+\index{ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}!UpdateProjectAsync@{UpdateProjectAsync}}
+\index{UpdateProjectAsync@{UpdateProjectAsync}!ColorMatcher.Models.FileColorRepository@{ColorMatcher.Models.FileColorRepository}}
+\doxysubsubsection{\texorpdfstring{UpdateProjectAsync()}{UpdateProjectAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} $>$ Color\+Matcher.\+Models.\+File\+Color\+Repository.\+Update\+Project\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}}]{project }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates an existing project with new values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em project} & The project with updated field values. Must have existing Id.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The updated project as persisted
+\end{DoxyReturn}
+
+
+Overwrites the project in storage with new values. Modified\+At timestamp is automatically updated to current time. Color\+History list is preserved (to add entries, use Add\+Color\+History\+Async). If project doesn\textquotesingle{}t exist, behavior depends on implementation (may throw or create new). 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository_adf11439fa6c35742dcfc436baa4fd437}{Color\+Matcher.\+Models.\+IColor\+Repository}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/File\+Color\+Repository.\+cs\end{DoxyCompactItemize}

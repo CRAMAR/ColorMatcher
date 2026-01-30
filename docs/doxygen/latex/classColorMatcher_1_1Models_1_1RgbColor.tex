@@ -1,0 +1,121 @@
+\doxysection{Color\+Matcher.\+Models.\+Rgb\+Color Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1RgbColor}{}\label{classColorMatcher_1_1Models_1_1RgbColor}\index{ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}}
+
+
+Represents a color in the RGB (Red-\/\+Green-\/\+Blue) color space.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor_ad0f181ab39ade191f983c45d9c61f1bb}{Rgb\+Color}} (byte \mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor_aaa0b7d8db78faffc09a66ae527c4035e}{r}}, byte g, byte b)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Rgb\+Color class with specified component values. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_a98949a8d75b5ab66076f1533a21baf13}\label{classColorMatcher_1_1Models_1_1RgbColor_a98949a8d75b5ab66076f1533a21baf13} 
+double double double b {\bfseries To\+Normalized} ()
+\item 
+override string \mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor_a9c01cd03911b9c6e93bfbf8e18ff7307}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Returns a string representation of the RGB color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor_aaa0b7d8db78faffc09a66ae527c4035e}{r}}
+\begin{DoxyCompactList}\small\item\em Converts RGB components from 0-\/255 byte range to normalized 0-\/1 double range. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_a90555c1ee89d9558069350e0ba81c579}\label{classColorMatcher_1_1Models_1_1RgbColor_a90555c1ee89d9558069350e0ba81c579} 
+double double {\bfseries g}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_a37824c9184d33e814dfc1b880ff21952}\label{classColorMatcher_1_1Models_1_1RgbColor_a37824c9184d33e814dfc1b880ff21952} 
+byte {\bfseries R}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Red component (0-\/255). Higher values indicate more red intensity. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_accf5ed7d144314a44aa00983d514ea22}\label{classColorMatcher_1_1Models_1_1RgbColor_accf5ed7d144314a44aa00983d514ea22} 
+byte {\bfseries G}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Green component (0-\/255). Higher values indicate more green intensity. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_a08d68c5545d0f6eab206ac98d8b45bcd}\label{classColorMatcher_1_1Models_1_1RgbColor_a08d68c5545d0f6eab206ac98d8b45bcd} 
+byte {\bfseries B}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Blue component (0-\/255). Higher values indicate more blue intensity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a color in the RGB (Red-\/\+Green-\/\+Blue) color space. 
+
+RGB is an additive color model where each component ranges from 0 (no intensity) to 255 (maximum intensity). This class is primarily used for input/output operations and sensor readings in the \doxylink{namespaceColorMatcher}{Color\+Matcher} application. For color difference calculations and perceptual color matching, RGB values are converted to the CIE LAB color space.
+
+RGB color space characteristics\+:
+\begin{DoxyItemize}
+\item Device-\/dependent color space (appearance varies by display)
+\item Used for light-\/based applications (displays, sensors)
+\item Three components\+: Red (0-\/255), Green (0-\/255), Blue (0-\/255)
+\item Component values are unsigned bytes for efficient storage
+\item Conversion to LAB space uses D65 illuminant with gamma correction
+\end{DoxyItemize}
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ red\ =\ \textcolor{keyword}{new}\ RgbColor(255,\ 0,\ 0);}
+\DoxyCodeLine{var\ normalized\ =\ red.ToNormalized();\ \textcolor{comment}{//\ (1.0,\ 0.0,\ 0.0)}}
+\DoxyCodeLine{var\ lab\ =\ ColorSpaceConverter.RgbToLab(red);}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_ad0f181ab39ade191f983c45d9c61f1bb}\label{classColorMatcher_1_1Models_1_1RgbColor_ad0f181ab39ade191f983c45d9c61f1bb} 
+\index{ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}!RgbColor@{RgbColor}}
+\index{RgbColor@{RgbColor}!ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}}
+\doxysubsubsection{\texorpdfstring{RgbColor()}{RgbColor()}}
+{\footnotesize\ttfamily Color\+Matcher.\+Models.\+Rgb\+Color.\+Rgb\+Color (\begin{DoxyParamCaption}\item[{byte}]{r,  }\item[{byte}]{g,  }\item[{byte}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the Rgb\+Color class with specified component values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & Red component (0-\/255)\\
+\hline
+{\em g} & Green component (0-\/255)\\
+\hline
+{\em b} & Blue component (0-\/255)\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_a9c01cd03911b9c6e93bfbf8e18ff7307}\label{classColorMatcher_1_1Models_1_1RgbColor_a9c01cd03911b9c6e93bfbf8e18ff7307} 
+\index{ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}!ToString@{ToString}}
+\index{ToString@{ToString}!ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string Color\+Matcher.\+Models.\+Rgb\+Color.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a string representation of the RGB color. 
+
+\begin{DoxyReturn}{Returns}
+String in format "{}\+RGB(\+R, G, B)"{} where R, G, B are component values 0-\/255.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1RgbColor_aaa0b7d8db78faffc09a66ae527c4035e}\label{classColorMatcher_1_1Models_1_1RgbColor_aaa0b7d8db78faffc09a66ae527c4035e} 
+\index{ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}!r@{r}}
+\index{r@{r}!ColorMatcher.Models.RgbColor@{ColorMatcher.Models.RgbColor}}
+\doxysubsubsection{\texorpdfstring{r}{r}}
+{\footnotesize\ttfamily double Color\+Matcher.\+Models.\+Rgb\+Color.\+r}
+
+
+
+Converts RGB components from 0-\/255 byte range to normalized 0-\/1 double range. 
+
+\begin{DoxyReturn}{Returns}
+A tuple of normalized (red, green, blue) values where each component ranges from 0.\+0 to 1.\+0. For example, RGB(255, 128, 0) returns (1.\+0, 0.\+502, 0.\+0). 
+\end{DoxyReturn}
+
+
+This normalization is typically used as an intermediate step in color space conversions. The normalized values are then gamma-\/corrected before conversion to LAB color space. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Rgb\+Color.\+cs\end{DoxyCompactItemize}

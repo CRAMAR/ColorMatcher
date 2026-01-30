@@ -1,0 +1,396 @@
+\doxysection{Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader}{}\label{classColorMatcher_1_1Models_1_1StubSensorReader}\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+
+
+Mock/stub implementation of ISensor\+Reader for development and testing without physical hardware.  
+
+
+
+
+Inheritance diagram for Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classColorMatcher_1_1Models_1_1StubSensorReader__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classColorMatcher_1_1Models_1_1StubSensorReader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a6879b159a94deb54fdc880c826bd33ed}{Set\+Next\+Reading\+Override}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}} color)
+\begin{DoxyCompactList}\small\item\em Sets the next color to be returned by Read\+Color\+Async. \end{DoxyCompactList}\item 
+Task$<$ bool $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_aeaa7f6581032cc45e393815fd4a02b24}{Connect\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Simulates connecting to the sensor. \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a2ae20b3eef1efa81807c55a5bb659d4f}{Disconnect\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Simulates disconnecting from the sensor. \end{DoxyCompactList}\item 
+Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a814a07e11988993f6886483e415c7355}{Read\+Color\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Returns a simulated color reading. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_ab6cc716e577df0e0a0d0db553753f281}{Read\+Color\+With\+Validation\+Async}} (int max\+Retries=3, int minimum\+Quality\+Score=70)
+\begin{DoxyCompactList}\small\item\em Returns a validated color reading with automatic retry and quality checking. \end{DoxyCompactList}\item 
+Task$<$ bool $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a858f30a34652404d7c0836d4e1780c8d}{Calibrate\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Simulates sensor calibration procedure. \end{DoxyCompactList}\item 
+Task$<$ string $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a832b4efeedb448025a509b4d31b364ce}{Get\+Status\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Returns simulated sensor status information. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a015c8a118708175076c65af64989c99f}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a015c8a118708175076c65af64989c99f} 
+void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes the sensor resources (implements IDisposable). Ensures Disconnect\+Async() is called during cleanup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a1708db23006b51b0ff5b31f05793cc93}{Device\+Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Friendly display name for this simulated sensor (NIX Mini 3 model). Used in UI and logging to identify the sensor source. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_abcc183af7e8364d114ef15eb60df41c2}{Device\+Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Unique device identifier for this stub sensor. In real sensors, this would be the serial number or MAC address. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_a6ae626b6666d1402cd4e96fc58334040}{Is\+Connected}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the sensor is currently connected and ready for measurements. Set to true by Connect\+Async(), false by Disconnect\+Async(). \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}} $>$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader_ab88532aeaf4398013c0a000e5a368b2c}{Reading\+History}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets read-\/only list of all color readings captured during this session. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader}{Color\+Matcher.\+Models.\+ISensor\+Reader}}}
+
+
+\doxysubsection{Detailed Description}
+Mock/stub implementation of ISensor\+Reader for development and testing without physical hardware. 
+
+This implementation simulates a realistic spectrophotometer (NIX Mini 3 model) by\+:
+\begin{DoxyItemize}
+\item Generating plausible simulated color readings
+\item Supporting quality score variations to test validation logic
+\item Allowing manual override for deterministic testing
+\item Maintaining session history of readings
+\item Simulating realistic measurement patterns and delays
+\end{DoxyItemize}
+
+{\bfseries{Use Cases}}
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Development}}\+: Develop and test color matching UI without physical hardware
+\item {\bfseries{Unit Testing}}\+: Mock sensor behavior for View\+Model and business logic tests
+\item {\bfseries{Demo/\+Prototype}}\+: Quickly prototype sensor integration without hardware setup
+\item {\bfseries{CI/\+CD}}\+: Run automated tests in build pipelines without sensor dependencies
+\end{DoxyEnumerate}
+
+{\bfseries{Realistic Simulation Features}}
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Color Clustering}}\+: Generates colors grouped around common paint colors (red, green, blue, gray) rather than purely random colors, matching typical color matching use cases
+\item {\bfseries{Quality Score Distribution}}\+: 80\% "{}good"{} (75-\/100), 20\% "{}fair"{} (50-\/75) to simulate realistic environmental variations (dust, lighting, angle)
+\item {\bfseries{Async Behavior}}\+: All methods are truly async (return Tasks) to match real sensor behavior
+\item {\bfseries{Device Metadata}}\+: Reports realistic device name, ID, and status simulating a real sensor
+\item {\bfseries{Session Tracking}}\+: Maintains reading history and count for audit trails
+\end{DoxyItemize}
+
+{\bfseries{Manual Override for Testing}}
+
+Use Set\+Next\+Reading\+Override() to force specific colors for deterministic tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ sensor\ =\ \textcolor{keyword}{new}\ StubSensorReader();}
+\DoxyCodeLine{await\ sensor.ConnectAsync();}
+\DoxyCodeLine{sensor.SetNextReadingOverride(\textcolor{keyword}{new}\ RgbColor(255,\ 0,\ 0));\ \textcolor{comment}{//\ Force\ red}}
+\DoxyCodeLine{var\ reading\ =\ await\ sensor.ReadColorAsync();\ \textcolor{comment}{//\ Returns\ red}}
+\DoxyCodeLine{\textcolor{comment}{//\ reading.RgbColor\ will\ be\ (255,\ 0,\ 0)}}
+
+\end{DoxyCode}
+
+
+After returning the overridden color, reverts to random generation for subsequent calls.
+
+{\bfseries{Limitations}}
+
+
+\begin{DoxyItemize}
+\item Does not simulate hardware communication failures or timeouts
+\item Calibrate\+Async() always succeeds (doesn\textquotesingle{}t simulate calibration issues)
+\item Doesn\textquotesingle{}t model sensor drift or measurement variation over time
+\item Battery simulation is hardcoded (always \texorpdfstring{$\sim$}{\string~}85\%)
+\end{DoxyItemize}
+
+These limitations are acceptable for development and testing purposes. For production, real sensor implementations should handle failure scenarios. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a858f30a34652404d7c0836d4e1780c8d}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a858f30a34652404d7c0836d4e1780c8d} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!CalibrateAsync@{CalibrateAsync}}
+\index{CalibrateAsync@{CalibrateAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{CalibrateAsync()}{CalibrateAsync()}}
+{\footnotesize\ttfamily Task$<$ bool $>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Calibrate\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Simulates sensor calibration procedure. 
+
+Always succeeds immediately (no simulated calibration failures). Verifies Is\+Connected first.
+
+In real sensor implementations, this would\+:
+\begin{DoxyItemize}
+\item Guide user to place calibration reference tile
+\item Measure the reference to establish baseline
+\item Verify calibration accuracy
+\item Store calibration data
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+Task completed with true (always succeeds)
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Invalid\+Operation\+Exception} & If sensor is not connected\\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a6d22744452deedd38beaf74451c1e1ae}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_aeaa7f6581032cc45e393815fd4a02b24}\label{classColorMatcher_1_1Models_1_1StubSensorReader_aeaa7f6581032cc45e393815fd4a02b24} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!ConnectAsync@{ConnectAsync}}
+\index{ConnectAsync@{ConnectAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{ConnectAsync()}{ConnectAsync()}}
+{\footnotesize\ttfamily Task$<$ bool $>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Connect\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Simulates connecting to the sensor. 
+
+Initializes internal state for measurement session\+:
+\begin{DoxyItemize}
+\item Sets Is\+Connected to true
+\item Resets measurement counter to 0
+\item Clears previous session history
+\end{DoxyItemize}
+
+Always succeeds immediately (no simulated connection failures).
+
+\begin{DoxyReturn}{Returns}
+Task completed with true (always succeeds)
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_ad061080c6b547c896ee88fd8d930a750}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a2ae20b3eef1efa81807c55a5bb659d4f}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a2ae20b3eef1efa81807c55a5bb659d4f} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!DisconnectAsync@{DisconnectAsync}}
+\index{DisconnectAsync@{DisconnectAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{DisconnectAsync()}{DisconnectAsync()}}
+{\footnotesize\ttfamily Task Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Disconnect\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Simulates disconnecting from the sensor. 
+
+Sets Is\+Connected to false. Preserves Reading\+History for session review. Safe to call multiple times (idempotent). 
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_aef12dcb8f318ee3c25230fed18180c85}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a832b4efeedb448025a509b4d31b364ce}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a832b4efeedb448025a509b4d31b364ce} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!GetStatusAsync@{GetStatusAsync}}
+\index{GetStatusAsync@{GetStatusAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{GetStatusAsync()}{GetStatusAsync()}}
+{\footnotesize\ttfamily Task$<$ string $>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Get\+Status\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns simulated sensor status information. 
+
+Returns a multiline string describing current state\+:
+\begin{DoxyItemize}
+\item Connected/disconnected status
+\item Device name and ID
+\item Total measurements taken in session
+\item Simulated battery level
+\item Simulated last calibration time
+\end{DoxyItemize}
+
+Example output when connected\+: "{}\+Connected\+: NIX Mini 3 (\+Stub)  Device ID\+: STUB-\/000001  Readings taken\+: 5  Battery\+: 85\% (simulated)  Last calibration\+: Today at 10\+:30 AM (simulated)"{}
+
+\begin{DoxyReturn}{Returns}
+Task completed with status string suitable for UI display
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_af115f2123ba14c742afe2db917c94fa7}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a814a07e11988993f6886483e415c7355}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a814a07e11988993f6886483e415c7355} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!ReadColorAsync@{ReadColorAsync}}
+\index{ReadColorAsync@{ReadColorAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{ReadColorAsync()}{ReadColorAsync()}}
+{\footnotesize\ttfamily Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}} $>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Read\+Color\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a simulated color reading. 
+
+Process\+:
+\begin{DoxyEnumerate}
+\item Verify sensor is connected (throws if not)
+\item Get color (override if set, or generate realistic random color)
+\item Create Sensor\+Reading with color, quality score, metadata
+\item Convert RGB to LAB color space
+\item Add to Reading\+History for audit trail
+\item Increment reading counter
+\end{DoxyEnumerate}
+
+\begin{DoxyReturn}{Returns}
+Task completed with a Sensor\+Reading containing simulated color and metadata
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Invalid\+Operation\+Exception} & If sensor is not connected\\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a156676843dd2b7b9e9e5a480f263eea5}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_ab6cc716e577df0e0a0d0db553753f281}\label{classColorMatcher_1_1Models_1_1StubSensorReader_ab6cc716e577df0e0a0d0db553753f281} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!ReadColorWithValidationAsync@{ReadColorWithValidationAsync}}
+\index{ReadColorWithValidationAsync@{ReadColorWithValidationAsync}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{ReadColorWithValidationAsync()}{ReadColorWithValidationAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}} $>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Read\+Color\+With\+Validation\+Async (\begin{DoxyParamCaption}\item[{int}]{max\+Retries = {\ttfamily 3},  }\item[{int}]{minimum\+Quality\+Score = {\ttfamily 70} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a validated color reading with automatic retry and quality checking. 
+
+Process\+:
+\begin{DoxyEnumerate}
+\item Loop up to max\+Retries times
+\item Call Read\+Color\+Async() to get measurement
+\item Check if Quality\+Score \texorpdfstring{$>$}{>}= minimum\+Quality\+Score
+\item If valid, return immediately
+\item If not valid and retries remain, pause 100ms and try again
+\item Return last reading (even if below quality threshold)
+\end{DoxyEnumerate}
+
+This ensures the application always gets a reading, even if quality is suboptimal.
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Retries} & Number of retry attempts (default 3)\\
+\hline
+{\em minimum\+Quality\+Score} & Quality threshold 0-\/100 (default 70)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Task completed with first reading that meets quality, or last reading if none do
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Invalid\+Operation\+Exception} & If sensor is not connected\\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a1157750cbd198d6c7e2435bd4549ec64}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a6879b159a94deb54fdc880c826bd33ed}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a6879b159a94deb54fdc880c826bd33ed} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!SetNextReadingOverride@{SetNextReadingOverride}}
+\index{SetNextReadingOverride@{SetNextReadingOverride}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{SetNextReadingOverride()}{SetNextReadingOverride()}}
+{\footnotesize\ttfamily void Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Set\+Next\+Reading\+Override (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the next color to be returned by Read\+Color\+Async. 
+
+Useful for deterministic testing where you need specific color values. After the override color is returned once, reverts to random color generation.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sensor.SetNextReadingOverride(\textcolor{keyword}{new}\ RgbColor(255,\ 87,\ 51));\ \textcolor{comment}{//\ Ferrari\ red}}
+\DoxyCodeLine{var\ reading\ =\ await\ sensor.ReadColorAsync();}
+\DoxyCodeLine{\textcolor{comment}{//\ reading.RgbColor\ will\ be\ exactly\ (255,\ 87,\ 51)}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & RGB color to return on next read (cannot be null)\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & If color is null\\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_abcc183af7e8364d114ef15eb60df41c2}\label{classColorMatcher_1_1Models_1_1StubSensorReader_abcc183af7e8364d114ef15eb60df41c2} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!DeviceId@{DeviceId}}
+\index{DeviceId@{DeviceId}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{DeviceId}{DeviceId}}
+{\footnotesize\ttfamily string Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Device\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Unique device identifier for this stub sensor. In real sensors, this would be the serial number or MAC address. 
+
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a8ef37a24dce955d9cd006e09665a08b5}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a1708db23006b51b0ff5b31f05793cc93}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a1708db23006b51b0ff5b31f05793cc93} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!DeviceName@{DeviceName}}
+\index{DeviceName@{DeviceName}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{DeviceName}{DeviceName}}
+{\footnotesize\ttfamily string Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Device\+Name\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Friendly display name for this simulated sensor (NIX Mini 3 model). Used in UI and logging to identify the sensor source. 
+
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a16f3019edb20ff0041e5c58582fd9281}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_a6ae626b6666d1402cd4e96fc58334040}\label{classColorMatcher_1_1Models_1_1StubSensorReader_a6ae626b6666d1402cd4e96fc58334040} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{IsConnected}{IsConnected}}
+{\footnotesize\ttfamily bool Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Is\+Connected\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Indicates whether the sensor is currently connected and ready for measurements. Set to true by Connect\+Async(), false by Disconnect\+Async(). 
+
+
+
+Implements \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader_a94418335b53e17e7278f2a0323b89c50}{Color\+Matcher.\+Models.\+ISensor\+Reader}}.
+
+\Hypertarget{classColorMatcher_1_1Models_1_1StubSensorReader_ab88532aeaf4398013c0a000e5a368b2c}\label{classColorMatcher_1_1Models_1_1StubSensorReader_ab88532aeaf4398013c0a000e5a368b2c} 
+\index{ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}!ReadingHistory@{ReadingHistory}}
+\index{ReadingHistory@{ReadingHistory}!ColorMatcher.Models.StubSensorReader@{ColorMatcher.Models.StubSensorReader}}
+\doxysubsubsection{\texorpdfstring{ReadingHistory}{ReadingHistory}}
+{\footnotesize\ttfamily IRead\+Only\+List$<$\mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}}$>$ Color\+Matcher.\+Models.\+Stub\+Sensor\+Reader.\+Reading\+History\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets read-\/only list of all color readings captured during this session. 
+
+Maintains complete audit trail of measurements in chronological order. Useful for session analysis, debugging, and verification testing.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ allReadings\ =\ sensor.ReadingHistory;}
+\DoxyCodeLine{var\ averageQuality\ =\ allReadings.Average(r\ =>\ r.QualityScore\ ??\ 0);}
+
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Stub\+Sensor\+Reader.\+cs\end{DoxyCompactItemize}

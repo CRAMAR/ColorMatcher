@@ -1,0 +1,90 @@
+\doxysection{Color\+Matcher.\+Models.\+Color\+Project Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1ColorProject}{}\label{classColorMatcher_1_1Models_1_1ColorProject}\index{ColorMatcher.Models.ColorProject@{ColorMatcher.Models.ColorProject}}
+
+
+Represents a color matching project with reference and sample colors.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a07692f92c5a15d133c953faaeb0756b0}\label{classColorMatcher_1_1Models_1_1ColorProject_a07692f92c5a15d133c953faaeb0756b0} 
+{\bfseries Color\+Project} (string name)
+\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a30bdc85735cd5ec4b62f4feb463cf57f}\label{classColorMatcher_1_1Models_1_1ColorProject_a30bdc85735cd5ec4b62f4feb463cf57f} 
+{\bfseries Color\+Project} (string name, string description)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_acffc0dd9784bd991baad7d19af413819}\label{classColorMatcher_1_1Models_1_1ColorProject_acffc0dd9784bd991baad7d19af413819} 
+string {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Unique identifier for the project (GUID recommended). Used for file naming and lookup in repository. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a1ac855292e1aeac94d5efbda91bf84d1}\label{classColorMatcher_1_1Models_1_1ColorProject_a1ac855292e1aeac94d5efbda91bf84d1} 
+string? {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em User-\/friendly project name. Typically describes the item being matched. Example\+: "{}\+Ferrari Red Paint"{} or "{}\+Yacht Hull Gelcoat"{}. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_aa1bd46a11c272a6ed7cc79b9b293f133}\label{classColorMatcher_1_1Models_1_1ColorProject_aa1bd46a11c272a6ed7cc79b9b293f133} 
+string? {\bfseries Description}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Optional detailed description of the project. Can include notes about the item, location, application method, etc. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a0004a0900556a8a0061bbb80a984be37}\label{classColorMatcher_1_1Models_1_1ColorProject_a0004a0900556a8a0061bbb80a984be37} 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}? {\bfseries Reference\+Color}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference color for matching (the target color to match). Typically represents the actual paint/gelcoat color being analyzed. Usually obtained from spectrophotometer or visual sample. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_aa19577cbadaec8f850f641aa7c3f5bba}\label{classColorMatcher_1_1Models_1_1ColorProject_aa19577cbadaec8f850f641aa7c3f5bba} 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}? {\bfseries Sample\+Color}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current sample color being evaluated for matching. Represents a candidate color being tested against the reference. Updated as new samples are evaluated. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a27f2cbe6a02a225c966f9292cb961090}\label{classColorMatcher_1_1Models_1_1ColorProject_a27f2cbe6a02a225c966f9292cb961090} 
+Date\+Time {\bfseries Created\+At}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Project creation timestamp in UTC. Set automatically when project is created via repository. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a0a6a3ab2da7a90b9925645e868c76e2c}\label{classColorMatcher_1_1Models_1_1ColorProject_a0a6a3ab2da7a90b9925645e868c76e2c} 
+Date\+Time {\bfseries Modified\+At}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Last modification timestamp in UTC. Updated automatically whenever project is saved. Useful for sorting and filtering recent projects. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a6e705aae220dff2586e39334aab26645}\label{classColorMatcher_1_1Models_1_1ColorProject_a6e705aae220dff2586e39334aab26645} 
+List$<$ \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}} $>$ {\bfseries Color\+History} = new List$<$\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}}$>$()\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Complete color matching history for this project. Contains Color\+History\+Entry for each color comparison attempt. Ordered chronologically (oldest to newest). Persisted with project to provide audit trail of matching attempts. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1ColorProject_a016f7097932a481aa7b60fc2be209c5e}\label{classColorMatcher_1_1Models_1_1ColorProject_a016f7097932a481aa7b60fc2be209c5e} 
+Dictionary$<$ string, string $>$ {\bfseries Metadata} = new Dictionary$<$string, string$>$()\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Project-\/specific metadata (e.\+g., batch number, surface type) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a color matching project with reference and sample colors. 
+
+A Color\+Project is the primary data container in \doxylink{namespaceColorMatcher}{Color\+Matcher}, holding all information related to a single color matching session including target (reference) color, evaluation (sample) colors, and complete history of all attempts.
+
+Project Lifecycle\+:
+\begin{DoxyEnumerate}
+\item Created with unique ID, name, description
+\item Reference color set (target paint/gelcoat color to match)
+\item Sample colors added and compared (generates history entries)
+\item Each comparison creates Color\+History\+Entry with delta-\/E and recommendation
+\item Project persisted to JSON file for later retrieval
+\item Can be updated with new samples or cleared to start over
+\end{DoxyEnumerate}
+
+Persistence\+:
+\begin{DoxyItemize}
+\item Projects are stored as JSON files with naming pattern\+: \{Project\+Id\}.json
+\item File\+Color\+Repository handles all persistence operations
+\item Modified\+At timestamp is automatically updated on save
+\item Color\+History is preserved across sessions
+\end{DoxyItemize}
+
+Example Usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ project\ =\ \textcolor{keyword}{new}\ ColorProject\ }
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \ \ \ Id\ =\ Guid.NewGuid().ToString(),}
+\DoxyCodeLine{\ \ \ \ Name\ =\ \textcolor{stringliteral}{"{}Ferrari\ Red\ Paint\ Match"{}},}
+\DoxyCodeLine{\ \ \ \ Description\ =\ \textcolor{stringliteral}{"{}Matching\ Ferrari\ 488\ GTB\ red\ to\ gelcoat"{}},}
+\DoxyCodeLine{\ \ \ \ ReferenceColor\ =\ \textcolor{keyword}{new}\ RgbColor(255,\ 0,\ 10),}
+\DoxyCodeLine{\ \ \ \ CreatedAt\ =\ DateTime.Now,}
+\DoxyCodeLine{\ \ \ \ ModifiedAt\ =\ DateTime.Now}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{await\ repository.CreateProjectAsync(project);}
+
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Color\+Project.\+cs\end{DoxyCompactItemize}

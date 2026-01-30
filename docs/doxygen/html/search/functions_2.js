@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['deleteprojectasync_0',['deleteprojectasync',['../classColorMatcher_1_1Models_1_1FileColorRepository.html#a65958ac99d76fe7e1bcc4519e70cb5b8',1,'ColorMatcher.Models.FileColorRepository.DeleteProjectAsync()'],['../interfaceColorMatcher_1_1Models_1_1IColorRepository.html#a531aac32f5467b8faa90808b48f5ff1f',1,'ColorMatcher.Models.IColorRepository.DeleteProjectAsync()'],['../classColorMatcher_1_1Models_1_1InMemoryColorRepository.html#acbf948d42c4a574c80910524a6161c08',1,'ColorMatcher.Models.InMemoryColorRepository.DeleteProjectAsync()'],['../classColorMatcher_1_1ViewModels_1_1MainWindowViewModel.html#a984eaf0f78fb3b941195dad168a9bf6e',1,'ColorMatcher.ViewModels.MainWindowViewModel.DeleteProjectAsync()']]],
+  ['deltae_1',['DeltaE',['../classColorMatcher_1_1Models_1_1LabColor.html#a23318d44e5bcce25d3da66ae301e28f4',1,'ColorMatcher::Models::LabColor']]],
+  ['disconnectasync_2',['disconnectasync',['../interfaceColorMatcher_1_1Models_1_1ISensorReader.html#aef12dcb8f318ee3c25230fed18180c85',1,'ColorMatcher.Models.ISensorReader.DisconnectAsync()'],['../classColorMatcher_1_1Models_1_1StubSensorReader.html#a2ae20b3eef1efa81807c55a5bb659d4f',1,'ColorMatcher.Models.StubSensorReader.DisconnectAsync()']]],
+  ['disconnectsensorasync_3',['DisconnectSensorAsync',['../classColorMatcher_1_1ViewModels_1_1MainWindowViewModel.html#a401a2afa63e21be61bc11c792b72dbba',1,'ColorMatcher::ViewModels::MainWindowViewModel']]],
+  ['dispose_4',['Dispose',['../classColorMatcher_1_1Models_1_1StubSensorReader.html#a015c8a118708175076c65af64989c99f',1,'ColorMatcher::Models::StubSensorReader']]]
+];
