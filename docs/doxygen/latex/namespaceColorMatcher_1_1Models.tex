@@ -1,0 +1,29 @@
+\doxysection{Color\+Matcher.\+Models Namespace Reference}
+\hypertarget{namespaceColorMatcher_1_1Models}{}\label{namespaceColorMatcher_1_1Models}\index{ColorMatcher.Models@{ColorMatcher.Models}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}}
+\begin{DoxyCompactList}\small\item\em Represents a single color matching attempt in project history. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}
+\begin{DoxyCompactList}\small\item\em Represents a color matching project with reference and sample colors. \end{DoxyCompactList}\item 
+class {\bfseries Color\+Space\+Converter}
+\begin{DoxyCompactList}\small\item\em Provides color space conversion utilities between RGB and CIE LAB color spaces. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1FileColorRepository}{File\+Color\+Repository}}
+\begin{DoxyCompactList}\small\item\em File-\/based implementation of IColor\+Repository that persists color projects to JSON files. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1IColorRepository}{IColor\+Repository}}
+\begin{DoxyCompactList}\small\item\em Repository interface for persisting color matching projects and history. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1InMemoryColorRepository}{In\+Memory\+Color\+Repository}}
+\begin{DoxyCompactList}\small\item\em In-\/memory implementation of IColor\+Repository for development, testing, and prototyping. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader}{ISensor\+Reader}}
+\begin{DoxyCompactList}\small\item\em Interface for interacting with color measurement hardware sensors (spectrophotometers, colorimeters). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}
+\begin{DoxyCompactList}\small\item\em Represents a color in the CIE LAB (L\texorpdfstring{$\ast$}{*}a\texorpdfstring{$\ast$}{*}b\texorpdfstring{$\ast$}{*}) perceptual color space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColorGraphModel}{Lab\+Color\+Graph\+Model}}
+\begin{DoxyCompactList}\small\item\em Represents color matching data and algorithms for visualization in LAB color space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}
+\begin{DoxyCompactList}\small\item\em Represents a color in the RGB (Red-\/\+Green-\/\+Blue) color space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading}{Sensor\+Reading}}
+\begin{DoxyCompactList}\small\item\em Encapsulates a color measurement captured from a spectrophotometer or colorimeter sensor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classColorMatcher_1_1Models_1_1StubSensorReader}{Stub\+Sensor\+Reader}}
+\begin{DoxyCompactList}\small\item\em Mock/stub implementation of ISensor\+Reader for development and testing without physical hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}

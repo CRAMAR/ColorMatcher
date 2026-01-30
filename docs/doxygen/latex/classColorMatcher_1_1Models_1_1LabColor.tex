@@ -1,0 +1,133 @@
+\doxysection{Color\+Matcher.\+Models.\+Lab\+Color Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1LabColor}{}\label{classColorMatcher_1_1Models_1_1LabColor}\index{ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}}
+
+
+Represents a color in the CIE LAB (L\texorpdfstring{$\ast$}{*}a\texorpdfstring{$\ast$}{*}b\texorpdfstring{$\ast$}{*}) perceptual color space.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor_ab88e07b3df58a63f6e7016fe13915ecf}{Lab\+Color}} (double l, double a, double b)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Lab\+Color class with specified component values. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor_a23318d44e5bcce25d3da66ae301e28f4}{DeltaE}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}} other)
+\begin{DoxyCompactList}\small\item\em Calculates the color difference (ΔE) between this color and another color using Euclidean distance in LAB space. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor_a8dd16f84e4c6dcfbef83c64a84966783}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Returns a formatted string representation of the LAB color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColor_ad9b90653925f83ccd73de5ad234a1207}\label{classColorMatcher_1_1Models_1_1LabColor_ad9b90653925f83ccd73de5ad234a1207} 
+double {\bfseries L}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Lightness component (L\texorpdfstring{$\ast$}{*}), ranging from 0 (black) to 100 (white). Represents the perceived brightness of the color independent of hue. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColor_a88ba6cfea6835df815316e406fd65625}\label{classColorMatcher_1_1Models_1_1LabColor_a88ba6cfea6835df815316e406fd65625} 
+double {\bfseries A}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Green-\/\+Red opponent component (a\texorpdfstring{$\ast$}{*}), typically ranging from -\/128 (green) to 127 (red). Negative values indicate green hues, positive values indicate red hues. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColor_aa3883d88ff45da4526073f905484ce3e}\label{classColorMatcher_1_1Models_1_1LabColor_aa3883d88ff45da4526073f905484ce3e} 
+double {\bfseries B}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Blue-\/\+Yellow opponent component (b\texorpdfstring{$\ast$}{*}), typically ranging from -\/128 (blue) to 127 (yellow). Negative values indicate blue hues, positive values indicate yellow hues. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a color in the CIE LAB (L\texorpdfstring{$\ast$}{*}a\texorpdfstring{$\ast$}{*}b\texorpdfstring{$\ast$}{*}) perceptual color space. 
+
+LAB is a device-\/independent color space designed to be perceptually uniform, meaning equal distances in LAB space correspond to equal perceived color differences by human eyes. This makes it ideal for color matching applications where perceptual accuracy is critical.
+
+CIE LAB color space characteristics\+:
+\begin{DoxyItemize}
+\item Device-\/independent color space (consistent across displays and media)
+\item Perceptually uniform\+: equal steps in LAB correspond to equal perceptual differences
+\item Three components\+: L\texorpdfstring{$\ast$}{*} (lightness), a\texorpdfstring{$\ast$}{*} (green-\/red), b\texorpdfstring{$\ast$}{*} (blue-\/yellow)
+\item L\texorpdfstring{$\ast$}{*} ranges from 0 (black) to 100 (white)
+\item a\texorpdfstring{$\ast$}{*} ranges from -\/128 (green) to 127 (red), neutral at 0
+\item b\texorpdfstring{$\ast$}{*} ranges from -\/128 (blue) to 127 (yellow), neutral at 0
+\item Standard illuminant\+: D65 (daylight), 2° observer angle
+\end{DoxyItemize}
+
+Color Difference (ΔE)\+: The Euclidean distance between two colors in LAB space represents the perceived color difference (ΔE).
+\begin{DoxyItemize}
+\item ΔE \texorpdfstring{$<$}{<} 1\+: Difference not perceptible by human eye
+\item ΔE 1-\/2\+: Barely perceptible difference
+\item ΔE 2-\/10\+: Noticeable difference
+\item ΔE \texorpdfstring{$>$}{>} 10\+: Very obvious difference
+\end{DoxyItemize}
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ refLab\ =\ \textcolor{keyword}{new}\ LabColor(50,\ 20,\ 30);}
+\DoxyCodeLine{var\ sampleLab\ =\ \textcolor{keyword}{new}\ LabColor(48,\ 22,\ 28);}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ deltaE\ =\ refLab.DeltaE(sampleLab);\ \textcolor{comment}{//\ \string~2.83}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (deltaE\ <\ 5)\ Console.WriteLine(\textcolor{stringliteral}{"{}Good\ color\ match!"{}});}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColor_ab88e07b3df58a63f6e7016fe13915ecf}\label{classColorMatcher_1_1Models_1_1LabColor_ab88e07b3df58a63f6e7016fe13915ecf} 
+\index{ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}!LabColor@{LabColor}}
+\index{LabColor@{LabColor}!ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}}
+\doxysubsubsection{\texorpdfstring{LabColor()}{LabColor()}}
+{\footnotesize\ttfamily Color\+Matcher.\+Models.\+Lab\+Color.\+Lab\+Color (\begin{DoxyParamCaption}\item[{double}]{l,  }\item[{double}]{a,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the Lab\+Color class with specified component values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & Lightness component (L\texorpdfstring{$\ast$}{*}), typically 0-\/100\\
+\hline
+{\em a} & Green-\/\+Red component (a\texorpdfstring{$\ast$}{*}), typically -\/128 to 127\\
+\hline
+{\em b} & Blue-\/\+Yellow component (b\texorpdfstring{$\ast$}{*}), typically -\/128 to 127\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1LabColor_a23318d44e5bcce25d3da66ae301e28f4}\label{classColorMatcher_1_1Models_1_1LabColor_a23318d44e5bcce25d3da66ae301e28f4} 
+\index{ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}!DeltaE@{DeltaE}}
+\index{DeltaE@{DeltaE}!ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}}
+\doxysubsubsection{\texorpdfstring{DeltaE()}{DeltaE()}}
+{\footnotesize\ttfamily double Color\+Matcher.\+Models.\+Lab\+Color.\+DeltaE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the color difference (ΔE) between this color and another color using Euclidean distance in LAB space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other LAB color to compare against\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The color difference (ΔE) as a double value. Interpretation\+:
+\begin{DoxyItemize}
+\item Less than 1\+: Not perceptible by human eye
+\item 1-\/2\+: Just barely perceptible
+\item 2-\/10\+: Noticeable difference
+\item Greater than 10\+: Very obvious difference 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+This implements the CIE76 color difference formula, which calculates the Euclidean distance between two points in LAB space\+: ΔE = √((Δ\+L\texorpdfstring{$\ast$}{*})² + (Δa\texorpdfstring{$\ast$}{*})² + (Δb\texorpdfstring{$\ast$}{*})²)
+
+For industrial applications requiring higher precision, more advanced formulas like CIE94 or CIEDE2000 may be used, but CIE76 provides a good balance of simplicity and accuracy for paint/gelcoat matching. \Hypertarget{classColorMatcher_1_1Models_1_1LabColor_a8dd16f84e4c6dcfbef83c64a84966783}\label{classColorMatcher_1_1Models_1_1LabColor_a8dd16f84e4c6dcfbef83c64a84966783} 
+\index{ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}!ToString@{ToString}}
+\index{ToString@{ToString}!ColorMatcher.Models.LabColor@{ColorMatcher.Models.LabColor}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string Color\+Matcher.\+Models.\+Lab\+Color.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a formatted string representation of the LAB color. 
+
+\begin{DoxyReturn}{Returns}
+String in format "{}\+LAB(\+L\+:value, a\+:value, b\+:value)"{} with 2 decimal places.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Lab\+Color.\+cs\end{DoxyCompactItemize}

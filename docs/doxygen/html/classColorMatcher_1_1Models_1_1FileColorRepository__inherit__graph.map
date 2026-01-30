@@ -1,0 +1,5 @@
+<map id="ColorMatcher.Models.FileColorRepository" name="ColorMatcher.Models.FileColorRepository">
+<area shape="rect" id="Node000001" title="File&#45;based implementation of IColorRepository that persists color projects to JSON files." alt="" coords="5,79,192,119"/>
+<area shape="rect" id="Node000002" href="$interfaceColorMatcher_1_1Models_1_1IColorRepository.html" title="Repository interface for persisting color matching projects and history." alt="" coords="33,5,164,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,44,101,79,96,79,96,44"/>
+</map>

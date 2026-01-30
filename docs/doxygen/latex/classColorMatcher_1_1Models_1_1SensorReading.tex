@@ -1,0 +1,274 @@
+\doxysection{Color\+Matcher.\+Models.\+Sensor\+Reading Class Reference}
+\hypertarget{classColorMatcher_1_1Models_1_1SensorReading}{}\label{classColorMatcher_1_1Models_1_1SensorReading}\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+
+
+Encapsulates a color measurement captured from a spectrophotometer or colorimeter sensor.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_a1ae1f4e1a2c380680ee97b8c1a1fca9e}{Sensor\+Reading}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}} rgb\+Color)
+\begin{DoxyCompactList}\small\item\em Creates a new Sensor\+Reading with the specified RGB color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_aacddef7778617604afe97b599496f120}{Sensor\+Reading}} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}} rgb\+Color, \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? lab\+Color)
+\begin{DoxyCompactList}\small\item\em Creates a new Sensor\+Reading with RGB and optional LAB color representations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}} \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_ac29efcaa6b65aaa1067771838bf147e2}{Rgb\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The RGB color captured by the sensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_a74c98df709261e66639ca61ef5ad0203}{Lab\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Optional LAB color representation of the measurement. \end{DoxyCompactList}\item 
+Date\+Time \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_a3f89e050be253e651d523a5419ff0ebe}{Timestamp}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Timestamp when the color measurement was captured (UTC). \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_aa9dfb89a3947fa550d719954ab68b857}{Device\+Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Sensor device identifier (serial number, MAC address, device name, etc). \end{DoxyCompactList}\item 
+int? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_a0ea5ff81f266e527b27736e142748b3f}{Quality\+Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Sensor-\/provided quality/confidence metric (0-\/100 scale). \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classColorMatcher_1_1Models_1_1SensorReading_a15c54279912fb9c264b090b9309ec8fe}{Metadata}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Optional device-\/specific metadata about the measurement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Encapsulates a color measurement captured from a spectrophotometer or colorimeter sensor. 
+
+Represents a single sensor reading with color values, quality metrics, and metadata. Acts as a data transfer object between sensor implementations and the application logic.
+
+{\bfseries{Sensor\+Reading Lifecycle}}
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Creation}}\+: Sensor implementation creates instance via Read\+Color\+Async()
+\begin{DoxyItemize}
+\item Passes measured Rgb\+Color (required)
+\item Optionally sets Lab\+Color (calculated or from sensor)
+\item Sets Timestamp (UTC time of measurement)
+\end{DoxyItemize}
+\item {\bfseries{Enrichment}}\+: Sensor adds metadata
+\begin{DoxyItemize}
+\item Device\+Id\+: Which physical sensor made the measurement
+\item Quality\+Score\+: Confidence metric (0-\/100)
+\item Metadata\+: Device-\/specific info (illumination angle, mode, etc)
+\end{DoxyItemize}
+\item {\bfseries{Validation}}\+: Application checks quality
+\begin{DoxyItemize}
+\item Examine Quality\+Score vs requirements
+\item Decide to accept or retry measurement
+\item Use Timestamp to order measurements in session
+\end{DoxyItemize}
+\item {\bfseries{Processing}}\+: Application converts to Color\+History\+Entry
+\begin{DoxyItemize}
+\item Extract RGB/\+LAB colors
+\item Store with reference/sample colors
+\item Preserve metadata in history notes
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+{\bfseries{Color Representation}}
+
+Sensor\+Reading provides colors in two formats\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Rgb\+Color}}\+: Device-\/dependent additive color model
+\begin{DoxyItemize}
+\item Always present (measured directly from sensor)
+\item Ranges 0-\/255 for each component
+\item Format understood by UI and graphics systems
+\end{DoxyItemize}
+\item {\bfseries{Lab\+Color}}\+: Device-\/independent perceptually uniform space
+\begin{DoxyItemize}
+\item Optional (may be null if sensor doesn\textquotesingle{}t provide)
+\item More useful for color difference calculations
+\item If null, application can convert via Color\+Space\+Converter.\+Rgb\+To\+Lab()
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+{\bfseries{Quality Metrics}}
+
+Quality\+Score (0-\/100) indicates measurement confidence\+:
+\begin{DoxyItemize}
+\item 100\+: Perfect, ideal conditions (rare)
+\item 75-\/90\+: Good, acceptable for most applications
+\item 50-\/75\+: Fair, some uncertainty
+\item \texorpdfstring{$<$}{<}50\+: Poor, potentially unreliable
+\end{DoxyItemize}
+
+Typical quality variations\+:
+\begin{DoxyItemize}
+\item Surface quality\+: Smooth surfaces score higher than textured
+\item Lighting\+: Stable lighting scores higher than variable
+\item Calibration\+: Post-\/calibration measurements score higher
+\item Angle\+: Measurements within 45° of normal score higher
+\end{DoxyItemize}
+
+{\bfseries{Metadata Field}}
+
+Device-\/specific sensor metadata examples\+:
+\begin{DoxyItemize}
+\item "{}\+Illumination\+: D65, 2° Observer, 45° angle"{}
+\item "{}\+Mode\+: Reflectance, Averaged 3 measurements"{}
+\item "{}\+Calibration offset\+: +2.\+5\%"{}
+\item "{}\+Reading \#42 in session"{} (for tracking order) 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_a1ae1f4e1a2c380680ee97b8c1a1fca9e}\label{classColorMatcher_1_1Models_1_1SensorReading_a1ae1f4e1a2c380680ee97b8c1a1fca9e} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!SensorReading@{SensorReading}}
+\index{SensorReading@{SensorReading}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{SensorReading()}{SensorReading()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Color\+Matcher.\+Models.\+Sensor\+Reading.\+Sensor\+Reading (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}}]{rgb\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new Sensor\+Reading with the specified RGB color. 
+
+Automatically sets\+:
+\begin{DoxyItemize}
+\item Timestamp to current UTC time
+\item Lab\+Color to null (can be set later or calculated by application)
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em rgb\+Color} & Measured RGB color (required, cannot be null)\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & If rgb\+Color is null\\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_aacddef7778617604afe97b599496f120}\label{classColorMatcher_1_1Models_1_1SensorReading_aacddef7778617604afe97b599496f120} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!SensorReading@{SensorReading}}
+\index{SensorReading@{SensorReading}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{SensorReading()}{SensorReading()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Color\+Matcher.\+Models.\+Sensor\+Reading.\+Sensor\+Reading (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}}}]{rgb\+Color,  }\item[{\mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}?}]{lab\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new Sensor\+Reading with RGB and optional LAB color representations. 
+
+Convenience constructor for sensor implementations that already have LAB conversion. Automatically sets Timestamp to current UTC time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rgb\+Color} & Measured RGB color (required)\\
+\hline
+{\em lab\+Color} & Optional corresponding LAB color (can be null)\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_aa9dfb89a3947fa550d719954ab68b857}\label{classColorMatcher_1_1Models_1_1SensorReading_aa9dfb89a3947fa550d719954ab68b857} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!DeviceId@{DeviceId}}
+\index{DeviceId@{DeviceId}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{DeviceId}{DeviceId}}
+{\footnotesize\ttfamily string? Color\+Matcher.\+Models.\+Sensor\+Reading.\+Device\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Sensor device identifier (serial number, MAC address, device name, etc). 
+
+Used to distinguish which physical sensor made the measurement when multiple sensors are in use. Examples\+:
+\begin{DoxyItemize}
+\item "{}\+STUB-\/000001"{} (stub for testing)
+\item "{}\+NIX-\/\+ABC123\+DEF456"{} (NIX Mini 3 serial number)
+\item "{}00\+:1\+A\+:2\+B\+:3\+C\+:4\+D\+:5\+E"{} (Bluetooth MAC address)
+\end{DoxyItemize}
+
+Optional -\/ may be null if sensor doesn\textquotesingle{}t provide identification. Set by sensor implementation, not by user. \Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_a74c98df709261e66639ca61ef5ad0203}\label{classColorMatcher_1_1Models_1_1SensorReading_a74c98df709261e66639ca61ef5ad0203} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!LabColor@{LabColor}}
+\index{LabColor@{LabColor}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{LabColor}{LabColor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classColorMatcher_1_1Models_1_1LabColor}{Lab\+Color}}? Color\+Matcher.\+Models.\+Sensor\+Reading.\+Lab\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Optional LAB color representation of the measurement. 
+
+Perceptually uniform, device-\/independent color space\+:
+\begin{DoxyItemize}
+\item L\texorpdfstring{$\ast$}{*} (0-\/100)\+: Lightness
+\item a\texorpdfstring{$\ast$}{*} (-\/128 to +127)\+: Red-\/green axis
+\item b\texorpdfstring{$\ast$}{*} (-\/128 to +127)\+: Yellow-\/blue axis
+\end{DoxyItemize}
+
+May be provided by sensor (if it performs LAB conversion) or can be calculated by application via Color\+Space\+Converter.\+Rgb\+To\+Lab(\+Rgb\+Color).
+
+Useful for color difference calculations and comparison operations. Null if not provided by sensor and not calculated by application. \Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_a15c54279912fb9c264b090b9309ec8fe}\label{classColorMatcher_1_1Models_1_1SensorReading_a15c54279912fb9c264b090b9309ec8fe} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!Metadata@{Metadata}}
+\index{Metadata@{Metadata}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{Metadata}{Metadata}}
+{\footnotesize\ttfamily string? Color\+Matcher.\+Models.\+Sensor\+Reading.\+Metadata\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Optional device-\/specific metadata about the measurement. 
+
+Device implementation may include contextual information\+:
+\begin{DoxyItemize}
+\item Illumination standard\+: "{}\+D65, 2° Observer, 45° measurement angle"{}
+\item Measurement mode\+: "{}\+Reflectance, 3-\/measurement average"{}
+\item Device settings\+: "{}\+Calibration offset +2.\+5\%, UV filter on"{}
+\item Session tracking\+: "{}\+Measurement \#42 of 100 in current session"{}
+\end{DoxyItemize}
+
+Free-\/form string, format depends on sensor implementation. Not parsed by application; used for logging and debugging. May be null if sensor doesn\textquotesingle{}t provide metadata. \Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_a0ea5ff81f266e527b27736e142748b3f}\label{classColorMatcher_1_1Models_1_1SensorReading_a0ea5ff81f266e527b27736e142748b3f} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!QualityScore@{QualityScore}}
+\index{QualityScore@{QualityScore}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{QualityScore}{QualityScore}}
+{\footnotesize\ttfamily int? Color\+Matcher.\+Models.\+Sensor\+Reading.\+Quality\+Score\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Sensor-\/provided quality/confidence metric (0-\/100 scale). 
+
+Indicates measurement confidence based on environmental factors, sensor calibration state, and measurement conditions.
+
+Interpretation\+:
+\begin{DoxyItemize}
+\item 100\+: Optimal conditions, maximum confidence
+\item 75-\/90\+: Good conditions, acceptable for normal use
+\item 50-\/75\+: Fair conditions, some uncertainty
+\item \texorpdfstring{$<$}{<}50\+: Poor conditions, potentially unreliable
+\end{DoxyItemize}
+
+Optional -\/ may be null if sensor doesn\textquotesingle{}t provide quality metrics. Used by Read\+Color\+With\+Validation\+Async() to decide if retry is needed. Example\+: If minimum\+Quality\+Score=70 and Quality\+Score=65, Read\+Color\+With\+Validation\+Async() will retry the measurement. \Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_ac29efcaa6b65aaa1067771838bf147e2}\label{classColorMatcher_1_1Models_1_1SensorReading_ac29efcaa6b65aaa1067771838bf147e2} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!RgbColor@{RgbColor}}
+\index{RgbColor@{RgbColor}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{RgbColor}{RgbColor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classColorMatcher_1_1Models_1_1RgbColor}{Rgb\+Color}} Color\+Matcher.\+Models.\+Sensor\+Reading.\+Rgb\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The RGB color captured by the sensor. 
+
+Represents the physical color measurement in the RGB color space (additive model). Values range 0-\/255 for each R, G, B component.
+
+This is the primary color representation and is always provided by sensor implementations. Device-\/dependent\+: Same physical color may yield slightly different RGB values on different sensor models or with different illumination standards.
+
+Required -\/ never null. Passed to constructor. \Hypertarget{classColorMatcher_1_1Models_1_1SensorReading_a3f89e050be253e651d523a5419ff0ebe}\label{classColorMatcher_1_1Models_1_1SensorReading_a3f89e050be253e651d523a5419ff0ebe} 
+\index{ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}!Timestamp@{Timestamp}}
+\index{Timestamp@{Timestamp}!ColorMatcher.Models.SensorReading@{ColorMatcher.Models.SensorReading}}
+\doxysubsubsection{\texorpdfstring{Timestamp}{Timestamp}}
+{\footnotesize\ttfamily Date\+Time Color\+Matcher.\+Models.\+Sensor\+Reading.\+Timestamp\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Timestamp when the color measurement was captured (UTC). 
+
+Automatically set to Date\+Time.\+Utc\+Now in constructor. Used for\+:
+\begin{DoxyItemize}
+\item Ordering measurements in a session
+\item Filtering measurements by time window
+\item Correlating with external events
+\item Session audit trail
+\end{DoxyItemize}
+
+Always in UTC to avoid timezone ambiguity in cloud/networked scenarios. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Sensor\+Reading.\+cs\end{DoxyCompactItemize}

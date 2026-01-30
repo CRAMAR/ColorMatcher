@@ -1,0 +1,109 @@
+\doxysection{Color\+Matcher.\+View\+Models.\+Main\+Window\+View\+Model Class Reference}
+\hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel}{}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel}\index{ColorMatcher.ViewModels.MainWindowViewModel@{ColorMatcher.ViewModels.MainWindowViewModel}}
+
+
+Inheritance diagram for Color\+Matcher.\+View\+Models.\+Main\+Window\+View\+Model\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Color\+Matcher.\+View\+Models.\+Main\+Window\+View\+Model\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a1982d269a50520c92c3893dc4a5b9a66}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a1982d269a50520c92c3893dc4a5b9a66} 
+async Task {\bfseries Initialize\+With\+File\+Repository\+Async} (string projects\+Directory)
+\begin{DoxyCompactList}\small\item\em Initialize the View\+Model with a file-\/based repository (should be called on app startup). \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_abb6d488fa54a5973fa1db1e4fa2f1bb5}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_abb6d488fa54a5973fa1db1e4fa2f1bb5} 
+async Task {\bfseries Create\+New\+Project\+Async} ()
+\begin{DoxyCompactList}\small\item\em Creates a new project from the current color state. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a5403b94ed7308723ae5af5378f38582a}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a5403b94ed7308723ae5af5378f38582a} 
+async Task {\bfseries Save\+Project\+Async} ()
+\begin{DoxyCompactList}\small\item\em Saves the current project with any modifications. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a79d493dbd4e79130d3f1a40ac2209adc}{Save\+Color\+Match\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Saves the current color match to the project history. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_af213974c8903c1ffae999a238e87a549}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_af213974c8903c1ffae999a238e87a549} 
+async Task {\bfseries Load\+Project\+Async} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}} project)
+\begin{DoxyCompactList}\small\item\em Loads a project from the repository and populates the UI. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a984eaf0f78fb3b941195dad168a9bf6e}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a984eaf0f78fb3b941195dad168a9bf6e} 
+async Task {\bfseries Delete\+Project\+Async} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorProject}{Color\+Project}}? project)
+\begin{DoxyCompactList}\small\item\em Deletes a project from the repository. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_ab156d5eb2201880c5577fe4bc4bfebdb}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_ab156d5eb2201880c5577fe4bc4bfebdb} 
+async Task$<$ string?$>$ {\bfseries Export\+Project\+Async} ()
+\begin{DoxyCompactList}\small\item\em Exports the current project as JSON. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a99744a12041f131e240af9c283fe2125}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a99744a12041f131e240af9c283fe2125} 
+async Task {\bfseries Import\+Project\+From\+Json\+Async} (string json\+Data)
+\begin{DoxyCompactList}\small\item\em Imports a project from JSON data. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_aaa0cd66d4074e5e422cf9c7d176d28ba}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_aaa0cd66d4074e5e422cf9c7d176d28ba} 
+async Task {\bfseries Connect\+Sensor\+Async} ()
+\begin{DoxyCompactList}\small\item\em Connects to the sensor device. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a401a2afa63e21be61bc11c792b72dbba}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a401a2afa63e21be61bc11c792b72dbba} 
+async Task {\bfseries Disconnect\+Sensor\+Async} ()
+\begin{DoxyCompactList}\small\item\em Disconnects from the sensor device. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a3c508b9e7140864da2a63832170a8f16}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a3c508b9e7140864da2a63832170a8f16} 
+async Task {\bfseries Read\+Sensor\+Sample\+Async} ()
+\begin{DoxyCompactList}\small\item\em Reads a color sample from the sensor and sets it as the sample color. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a34c27e4d0e5ac362ab135e28622ad97d}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a34c27e4d0e5ac362ab135e28622ad97d} 
+async Task {\bfseries Read\+Sensor\+Reference\+Async} ()
+\begin{DoxyCompactList}\small\item\em Reads a color reference from the sensor and sets it as the reference color. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a3c564505fb866111a78e839b360f1fc3}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a3c564505fb866111a78e839b360f1fc3} 
+async Task {\bfseries Calibrate\+Sensor\+Async} ()
+\begin{DoxyCompactList}\small\item\em Calibrates the sensor device. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a46bdd8ab2d1fd33e30a10a95e98b771c}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a46bdd8ab2d1fd33e30a10a95e98b771c} 
+void {\bfseries Set\+Sensor\+Reader} (\mbox{\hyperlink{interfaceColorMatcher_1_1Models_1_1ISensorReader}{ISensor\+Reader}} sensor)
+\begin{DoxyCompactList}\small\item\em Sets a custom ISensor\+Reader implementation (for testing or hardware integration). \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a2f705169b5632385e2f37c1e10f4e77c}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a2f705169b5632385e2f37c1e10f4e77c} 
+void {\bfseries Reuse\+As\+Reference} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}}? entry)
+\begin{DoxyCompactList}\small\item\em Reuses a history entry as the reference color. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a90768a95209d63ed51848612c8197bda}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a90768a95209d63ed51848612c8197bda} 
+void {\bfseries Reuse\+As\+Sample} (\mbox{\hyperlink{classColorMatcher_1_1Models_1_1ColorHistoryEntry}{Color\+History\+Entry}}? entry)
+\begin{DoxyCompactList}\small\item\em Reuses a history entry as the sample color. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_ac8523f06fbf78e2c043bb7a6f335e044}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_ac8523f06fbf78e2c043bb7a6f335e044} 
+async Task {\bfseries Export\+History\+As\+Csv\+Async} ()
+\begin{DoxyCompactList}\small\item\em Exports history as CSV format string. \end{DoxyCompactList}\item 
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a32476b1041f8e61093b620cf48d1f4dd}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a32476b1041f8e61093b620cf48d1f4dd} 
+async Task {\bfseries Clear\+History\+Async} ()
+\begin{DoxyCompactList}\small\item\em Clears all history entries from current project. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a79d493dbd4e79130d3f1a40ac2209adc}\label{classColorMatcher_1_1ViewModels_1_1MainWindowViewModel_a79d493dbd4e79130d3f1a40ac2209adc} 
+\index{ColorMatcher.ViewModels.MainWindowViewModel@{ColorMatcher.ViewModels.MainWindowViewModel}!SaveColorMatchAsync@{SaveColorMatchAsync}}
+\index{SaveColorMatchAsync@{SaveColorMatchAsync}!ColorMatcher.ViewModels.MainWindowViewModel@{ColorMatcher.ViewModels.MainWindowViewModel}}
+\doxysubsubsection{\texorpdfstring{SaveColorMatchAsync()}{SaveColorMatchAsync()}}
+{\footnotesize\ttfamily async Task Color\+Matcher.\+View\+Models.\+Main\+Window\+View\+Model.\+Save\+Color\+Match\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Saves the current color match to the project history. 
+
+Creates a new project automatically if none exists. Validates reference and sample colors, calculates ΔE, generates tint recommendations, and adds entry to project history with user-\/provided notes and acceptance status.
+
+After successful save\+:
+\begin{DoxyItemize}
+\item Match\+Notes are cleared to empty string
+\item Is\+Match\+Accepted is reset to true
+\item History entry is persisted to disk via repository
+\end{DoxyItemize}
+
+The Match Details section (UI) captures\+:
+\begin{DoxyItemize}
+\item Notes\+: User annotations (e.\+g., "{}\+Post-\/recalibration"{})
+\item Is\+Accepted\+: Whether match met quality threshold Both are stored in Color\+History\+Entry for audit/reporting. 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+View\+Models/Main\+Window\+View\+Model.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\doxysection{Color\+Matcher.\+View\+Models.\+View\+Model\+Base Class Reference}
+\hypertarget{classColorMatcher_1_1ViewModels_1_1ViewModelBase}{}\label{classColorMatcher_1_1ViewModels_1_1ViewModelBase}\index{ColorMatcher.ViewModels.ViewModelBase@{ColorMatcher.ViewModels.ViewModelBase}}
+
+
+Base class for all view models in the \doxylink{namespaceColorMatcher}{Color\+Matcher} application.  
+
+
+
+
+Inheritance diagram for Color\+Matcher.\+View\+Models.\+View\+Model\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classColorMatcher_1_1ViewModels_1_1ViewModelBase__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Color\+Matcher.\+View\+Models.\+View\+Model\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classColorMatcher_1_1ViewModels_1_1ViewModelBase__coll__graph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Detailed Description}
+Base class for all view models in the \doxylink{namespaceColorMatcher}{Color\+Matcher} application. 
+
+Inherits from MVVM Toolkit\textquotesingle{}s Observable\+Object, providing automatic INotify\+Property\+Changed support for property change notifications to the Avalonia UI framework.
+
+{\bfseries{MVVM Pattern in \doxylink{namespaceColorMatcher}{Color\+Matcher}}}
+
+This application uses the Model-\/\+View-\/\+View\+Model (MVVM) architectural pattern\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Model}}\+: Color data, business logic (Color\+Project, Color\+History\+Entry, Color\+Space\+Converter)
+\item {\bfseries{View\+Model}}\+: State management, command handling (Main\+Window\+View\+Model)
+\item {\bfseries{View}}\+: UI presentation layer (Avalonia XAML and code-\/behind)
+\end{DoxyItemize}
+
+{\bfseries{View\+Model\+Base Responsibilities}}
+
+By inheriting from Observable\+Object, all view models automatically get\+:
+\begin{DoxyEnumerate}
+\item INotify\+Property\+Changed implementation for property change notifications
+\item Relay command support via \mbox{[}Relay\+Command\mbox{]} attribute
+\item Observable property support via \mbox{[}Observable\+Property\mbox{]} attribute
+\item Built-\/in change detection for MVVM Toolkit features
+\end{DoxyEnumerate}
+
+{\bfseries{Usage}}
+
+All view model classes should inherit from View\+Model\+Base and use \mbox{[}Observable\+Property\mbox{]} for properties that need to notify the UI\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }MyViewModel\ :\ ViewModelBase}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Automatically\ generates\ INotifyPropertyChanged\ notifications}}
+\DoxyCodeLine{\ \ \ \ [ObservableProperty]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ myProperty\ =\ \textcolor{stringliteral}{"{}initial\ value"{}};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Automatically\ generates\ ICommand\ from\ method}}
+\DoxyCodeLine{\ \ \ \ [RelayCommand]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ async\ Task\ MyCommandAsync()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Command\ logic}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Why MVVM Toolkit}}
+
+Rather than manual INotify\+Property\+Changed implementation with backing fields, the MVVM Toolkit uses source generation (C\# 11) to\+:
+\begin{DoxyItemize}
+\item Eliminate boilerplate code
+\item Ensure consistency and reduce bugs
+\item Provide compile-\/time safety
+\item Enable clean, readable view model code 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+View\+Models/View\+Model\+Base.\+cs\end{DoxyCompactItemize}
