@@ -12,7 +12,7 @@ namespace ColorMatcher.Tests
     /// </summary>
     public class ColorHistoryViewModelTests
     {
-        private MainWindowViewModel CreateViewModel()
+        private static MainWindowViewModel CreateViewModel()
         {
             return new MainWindowViewModel();
         }
@@ -235,8 +235,9 @@ namespace ColorMatcher.Tests
         {
             // Arrange
             var vm = CreateViewModel();
+            #pragma warning disable CS8625
             var entry = new ColorHistoryEntry(null, new RgbColor(200, 100, 50), 25, "Test");
-
+            #pragma warning restore CS8625
             // Act & Assert - should not throw
             vm.ReuseAsReference(entry);
         }
@@ -246,8 +247,9 @@ namespace ColorMatcher.Tests
         {
             // Arrange
             var vm = CreateViewModel();
+            #pragma warning disable CS8625
             var entry = new ColorHistoryEntry(new RgbColor(128, 64, 32), null, 25, "Test");
-
+            #pragma warning restore CS8625
             // Act & Assert - should not throw
             vm.ReuseAsSample(entry);
         }
