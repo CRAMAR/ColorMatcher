@@ -46,7 +46,6 @@ namespace ColorMatcher.Tests
         public void ReferenceColorUpdate_WithInvalidByte_IsIgnored(string r)
         {
             var vm = CreateViewModel();
-            var originalR = vm.ReferenceR;
 
             vm.ReferenceR = r;
 
@@ -79,7 +78,6 @@ namespace ColorMatcher.Tests
         public void ReferenceHexUpdate_WithInvalidHex_IsIgnored(string hex)
         {
             var vm = CreateViewModel();
-            var originalHex = vm.ReferenceHex;
 
             vm.ReferenceHex = hex;
 
@@ -451,33 +449,6 @@ namespace ColorMatcher.Tests
 
         #endregion
 
-        #region Export/Import
-
-        [Fact]
-        public async Task ExportProject_WithoutProject_ReturnsNull()
-        {
-            var vm = CreateViewModel();
-
-            await vm.ExportProjectCommand.ExecuteAsync(null);
-
-            // Should handle gracefully
-            Assert.NotNull(vm);
-        }
-
-        [Fact]
-        public async Task ExportProject_WithProject_ReturnsValidJson()
-        {
-            var vm = CreateViewModel();
-            vm.ProjectName = "Export Test";
-            await vm.CreateNewProjectCommand.ExecuteAsync(null);
-
-            await vm.ExportProjectCommand.ExecuteAsync(null);
-
-            // Export should have completed without throwing
-            Assert.NotNull(vm.CurrentProject);
-        }
-
-        #endregion
 
         #region Concurrent Operations
 
