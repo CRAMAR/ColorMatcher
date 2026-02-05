@@ -23,9 +23,20 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
+            var vm = new MainWindowViewModel();
+            try
+            {
+                // Try to use NixMini3Reader if available
+                var nixReader = new ColorMatcher.Models.NixMini3Reader();
+                vm.SetSensorReader(nixReader);
+            }
+            catch (Exception)
+            {
+                // Fallback to default (StubSensorReader)
+            }
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = vm,
             };
         }
 
