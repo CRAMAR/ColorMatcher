@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace ColorMatcher.ViewModels;
-
+namespace ColorMatcher.ViewModels
+{
 /// <summary>
 /// Base class for all view models in the ColorMatcher application.
 /// 
@@ -51,11 +51,11 @@ namespace ColorMatcher.ViewModels;
 /// Rather than manual INotifyPropertyChanged implementation with backing fields,
 /// the MVVM Toolkit uses source generation (C# 11) to:
 /// - Eliminate boilerplate code
-/// - Ensure consistency and reduce bugs
 /// - Provide compile-time safety
 /// - Enable clean, readable view model code
 /// </remarks>
 /// </summary>
 public abstract class ViewModelBase : ObservableObject
 {
+}
 }

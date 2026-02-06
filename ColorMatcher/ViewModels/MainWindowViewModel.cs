@@ -10,7 +10,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ColorMatcher.Models;
 
-namespace ColorMatcher.ViewModels;
+namespace ColorMatcher.ViewModels
+{
 
 public partial class MainWindowViewModel : ViewModelBase
 {
@@ -780,4 +781,5 @@ public partial class MainWindowViewModel : ViewModelBase
         IsProjectModified = true;
         await SaveProjectAsync();
     }
+}
 }

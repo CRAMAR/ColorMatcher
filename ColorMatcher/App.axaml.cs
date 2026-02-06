@@ -24,16 +24,18 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
             var vm = new MainWindowViewModel();
+#if NET6_0_OR_GREATER && WINDOWS
             try
             {
                 // Try to use NixMini3Reader if available
                 var nixReader = new ColorMatcher.Models.NixMini3Reader();
                 vm.SetSensorReader(nixReader);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 // Fallback to default (StubSensorReader)
             }
+#endif
             desktop.MainWindow = new MainWindow
             {
                 DataContext = vm,

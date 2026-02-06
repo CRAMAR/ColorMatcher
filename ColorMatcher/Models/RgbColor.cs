@@ -1,4 +1,5 @@
-namespace ColorMatcher.Models;
+namespace ColorMatcher.Models
+{
 
 /// <summary>
 /// Represents a color in the RGB (Red-Green-Blue) color space.
@@ -73,4 +74,5 @@ public class RgbColor
     /// </summary>
     /// <returns>String in format "RGB(R, G, B)" where R, G, B are component values 0-255.</returns>
     public override string ToString() => $"RGB({R}, {G}, {B})";
+    }
 }
