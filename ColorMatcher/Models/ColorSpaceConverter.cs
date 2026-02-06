@@ -1,7 +1,7 @@
 using System;
 
-namespace ColorMatcher.Models;
-
+namespace ColorMatcher.Models
+{
 /// <summary>
 /// Provides color space conversion utilities between RGB and CIE LAB color spaces.
 /// 
@@ -249,4 +249,5 @@ public static class ColorSpaceConverter
         var clamped = Math.Max(0, Math.Min(255, value));
         return (byte)Math.Round(clamped);
     }
+}
 }

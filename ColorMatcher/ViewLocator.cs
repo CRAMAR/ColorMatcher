@@ -4,7 +4,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using ColorMatcher.ViewModels;
 
-namespace ColorMatcher;
+namespace ColorMatcher
+{
 
 /// <summary>
 /// Given a view model, returns the corresponding view if possible.
@@ -34,4 +35,5 @@ public class ViewLocator : IDataTemplate
     {
         return data is ViewModelBase;
     }
+}
 }

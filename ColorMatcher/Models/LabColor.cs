@@ -1,6 +1,7 @@
 using System;
 
-namespace ColorMatcher.Models;
+namespace ColorMatcher.Models
+{
 
 /// <summary>
 /// Represents a color in the CIE LAB (L*a*b*) perceptual color space.
@@ -98,4 +99,5 @@ public class LabColor
     /// </summary>
     /// <returns>String in format "LAB(L:value, a:value, b:value)" with 2 decimal places.</returns>
     public override string ToString() => $"LAB(L:{L:F2}, a:{A:F2}, b:{B:F2})";
+    }
 }

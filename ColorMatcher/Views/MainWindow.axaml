@@ -15,6 +15,27 @@
 
     <Grid Margin="24" ColumnDefinitions="340,*" RowDefinitions="Auto,*,Auto">
         <StackPanel Grid.Column="0" Spacing="16">
+            <!-- Sensor Panel -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Sensor Controls" FontWeight="SemiBold" FontSize="14" />
+                <Border CornerRadius="8" BorderBrush="#2E2E2E" BorderThickness="1" Background="#101010">
+                    <StackPanel Spacing="10" Margin="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <TextBlock Text="Status:" FontWeight="Medium" />
+                            <TextBlock Text="{Binding SensorStatus}" />
+                            <!-- Status indicator: add a colored dot if desired -->
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="Connect" Command="{Binding ConnectSensorCommand}" IsEnabled="{Binding IsSensorConnected, Converter={StaticResource InverseBoolConverter}}" />
+                            <Button Content="Disconnect" Command="{Binding DisconnectSensorCommand}" IsEnabled="{Binding IsSensorConnected}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="Read Reference" Command="{Binding ReadSensorReferenceCommand}" IsEnabled="{Binding IsSensorConnected}" />
+                            <Button Content="Read Sample" Command="{Binding ReadSensorSampleCommand}" IsEnabled="{Binding IsSensorConnected}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
             <StackPanel>
                 <TextBlock Text="ColorMatcher" FontSize="24" FontWeight="SemiBold" />
                 <TextBlock Text="Enter target and sample colors to visualize in LAB space." Opacity="0.7" />
